@@ -1,0 +1,636 @@
+asyncapi: 3.0.0
+info:
+  title: Amazon DynamoDB Streams
+  version: '2012-08-10'
+  description: >-
+    Amazon DynamoDB Streams captures a time-ordered sequence of item-level
+    modifications in any DynamoDB table and stores this information in a log for
+    up to 24 hours. Applications can access this log and view the data items as
+    they appeared before and after they were modified, in near-real time.
+
+
+    DynamoDB Streams writes stream records in near-real time so that you can
+    build applications that consume these streams and take action based on the
+    contents. A stream record contains information about a data modification to
+    a single item in a DynamoDB table. Stream records are organized into groups
+    called shards. Each shard acts as a container for multiple stream records
+    and contains information required for accessing and iterating through these
+    records.
+
+
+    Stream records can be configured to capture one of four view types:
+    KEYS_ONLY (only the key attributes of the modified item), NEW_IMAGE (the
+    entire item as it appears after modification), OLD_IMAGE (the entire item as
+    it appeared before modification), or NEW_AND_OLD_IMAGES (both the new and
+    old images of the item).
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  externalDocs:
+    description: Amazon DynamoDB Streams Developer Guide
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+  tags:
+    - name: dynamodb
+      description: Amazon DynamoDB
+    - name: streams
+      description: Change data capture streams
+    - name: event-driven
+      description: Event-driven architecture
+    - name: cdc
+      description: Change Data Capture
+    - name: aws
+      description: Amazon Web Services
+
+servers:
+  production:
+    host: streams.dynamodb.{region}.amazonaws.com
+    protocol: https
+    description: >-
+      Amazon DynamoDB Streams regional endpoint. Stream records are accessed
+      via the DynamoDB Streams API using HTTP/JSON protocol with AWS SigV4
+      authentication.
+    variables:
+      region:
+        default: us-east-1
+        description: AWS Region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-north-1
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-south-1
+          - sa-east-1
+          - ca-central-1
+    security:
+      - $ref: '#/components/securitySchemes/aws_sigv4'
+
+  lambda-trigger:
+    host: lambda.{region}.amazonaws.com
+    protocol: https
+    description: >-
+      AWS Lambda integration endpoint. DynamoDB Streams can trigger Lambda
+      functions automatically via event source mapping, providing a serverless
+      stream processing pattern.
+    variables:
+      region:
+        default: us-east-1
+        description: AWS Region
+
+channels:
+  streamRecord:
+    address: /{tableName}/stream/{streamLabel}
+    title: DynamoDB Stream Record Channel
+    description: >-
+      A DynamoDB Stream for a specific table. When DynamoDB Streams is enabled
+      on a table, every modification to data items in the table is captured as
+      a stream record. Each stream record is written in near-real time and
+      appears in the stream in the order in which the actual modifications
+      occurred. Stream records are organized into shards, which are containers
+      for stream records.
+    parameters:
+      tableName:
+        description: The name of the DynamoDB table that has streams enabled
+      streamLabel:
+        description: >-
+          A timestamp in ISO 8601 format that uniquely identifies the stream.
+          This label is used as a prefix for all shards created for the stream.
+    messages:
+      insertRecord:
+        $ref: '#/components/messages/StreamRecordInsert'
+      modifyRecord:
+        $ref: '#/components/messages/StreamRecordModify'
+      removeRecord:
+        $ref: '#/components/messages/StreamRecordRemove'
+
+  lambdaTrigger:
+    address: /lambda/event-source/{eventSourceMappingId}
+    title: Lambda Event Source Mapping Channel
+    description: >-
+      DynamoDB Streams can be configured as an event source for AWS Lambda.
+      Lambda polls the stream and invokes the function synchronously with a
+      batch of stream records. The event source mapping controls the batch
+      size, starting position, and error handling behavior.
+    parameters:
+      eventSourceMappingId:
+        description: The unique identifier of the event source mapping
+    messages:
+      lambdaBatch:
+        $ref: '#/components/messages/LambdaStreamEvent'
+
+operations:
+  onInsert:
+    action: receive
+    channel:
+      $ref: '#/channels/streamRecord'
+    title: Item Inserted
+    summary: Receive notification when a new item is inserted into the table
+    description: >-
+      Triggered when a new item is created in the DynamoDB table using PutItem,
+      BatchWriteItem, or TransactWriteItems. The stream record contains the
+      new image of the item depending on the StreamViewType configured.
+    messages:
+      - $ref: '#/channels/streamRecord/messages/insertRecord'
+
+  onModify:
+    action: receive
+    channel:
+      $ref: '#/channels/streamRecord'
+    title: Item Modified
+    summary: Receive notification when an existing item is modified
+    description: >-
+      Triggered when an existing item in the DynamoDB table is updated using
+      UpdateItem, PutItem (replacing existing), BatchWriteItem, or
+      TransactWriteItems. The stream record contains the old and/or new image
+      of the item depending on the StreamViewType configured.
+    messages:
+      - $ref: '#/channels/streamRecord/messages/modifyRecord'
+
+  onRemove:
+    action: receive
+    channel:
+      $ref: '#/channels/streamRecord'
+    title: Item Removed
+    summary: Receive notification when an item is deleted from the table
+    description: >-
+      Triggered when an item is deleted from the DynamoDB table using
+      DeleteItem, BatchWriteItem, or TransactWriteItems. The stream record
+      contains the old image of the item depending on the StreamViewType
+      configured. Also triggered when TTL expires an item.
+    messages:
+      - $ref: '#/channels/streamRecord/messages/removeRecord'
+
+  onLambdaTrigger:
+    action: receive
+    channel:
+      $ref: '#/channels/lambdaTrigger'
+    title: Lambda Stream Trigger
+    summary: Lambda function invoked with a batch of DynamoDB stream records
+    description: >-
+      When configured as a Lambda event source, DynamoDB Streams will poll the
+      stream and invoke the Lambda function with batches of stream records.
+      The batch size is configurable (1-10000 records). The function receives
+      the records in an event object containing the stream record data.
+    messages:
+      - $ref: '#/channels/lambdaTrigger/messages/lambdaBatch'
+
+components:
+  securitySchemes:
+    aws_sigv4:
+      type: httpApiKey
+      name: Authorization
+      in: header
+      description: >-
+        AWS Signature Version 4 authentication. All DynamoDB Streams requests
+        must be signed using the AWS SigV4 signing process. The service name
+        for signing is 'dynamodb'.
+
+  messages:
+    StreamRecordInsert:
+      name: StreamRecordInsert
+      title: Item Insert Stream Record
+      summary: A stream record generated when a new item is inserted
+      description: >-
+        Contains the new image of the item that was inserted. The exact
+        attributes included depend on the StreamViewType: KEYS_ONLY returns
+        just the key attributes, NEW_IMAGE returns the entire new item,
+        OLD_IMAGE returns nothing for inserts, NEW_AND_OLD_IMAGES returns
+        the new item only (no old image exists).
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/StreamRecord'
+      examples:
+        - name: InsertNewUser
+          summary: New user item inserted into a Users table
+          payload:
+            eventID: '7de3041dd47d7c024cff8e5d6b0c5632'
+            eventName: INSERT
+            eventVersion: '1.1'
+            eventSource: 'aws:dynamodb'
+            awsRegion: us-east-1
+            dynamodb:
+              ApproximateCreationDateTime: 1709486400
+              Keys:
+                UserId:
+                  S: 'user-123'
+              NewImage:
+                UserId:
+                  S: 'user-123'
+                Name:
+                  S: 'Jane Doe'
+                Email:
+                  S: 'jane@example.com'
+                CreatedAt:
+                  S: '2026-03-03T12:00:00Z'
+              SequenceNumber: '111'
+              SizeBytes: 256
+              StreamViewType: NEW_AND_OLD_IMAGES
+            eventSourceARN: 'arn:aws:dynamodb:us-east-1:123456789012:table/Users/stream/2026-03-03T00:00:00.000'
+
+    StreamRecordModify:
+      name: StreamRecordModify
+      title: Item Modify Stream Record
+      summary: A stream record generated when an existing item is modified
+      description: >-
+        Contains the old and/or new image of the item that was modified. The
+        exact attributes included depend on the StreamViewType. With
+        NEW_AND_OLD_IMAGES, both the pre-modification and post-modification
+        item data are included, enabling diff-based processing.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/StreamRecord'
+      examples:
+        - name: UpdateUserEmail
+          summary: User email address updated
+          payload:
+            eventID: '9a87b6c5d4e3f2a1b0c9d8e7f6a5b4c3'
+            eventName: MODIFY
+            eventVersion: '1.1'
+            eventSource: 'aws:dynamodb'
+            awsRegion: us-east-1
+            dynamodb:
+              ApproximateCreationDateTime: 1709486460
+              Keys:
+                UserId:
+                  S: 'user-123'
+              OldImage:
+                UserId:
+                  S: 'user-123'
+                Name:
+                  S: 'Jane Doe'
+                Email:
+                  S: 'jane@example.com'
+              NewImage:
+                UserId:
+                  S: 'user-123'
+                Name:
+                  S: 'Jane Doe'
+                Email:
+                  S: 'jane.doe@example.com'
+              SequenceNumber: '222'
+              SizeBytes: 512
+              StreamViewType: NEW_AND_OLD_IMAGES
+            eventSourceARN: 'arn:aws:dynamodb:us-east-1:123456789012:table/Users/stream/2026-03-03T00:00:00.000'
+
+    StreamRecordRemove:
+      name: StreamRecordRemove
+      title: Item Remove Stream Record
+      summary: A stream record generated when an item is deleted
+      description: >-
+        Contains the old image of the item that was deleted. The exact
+        attributes included depend on the StreamViewType. Removal events are
+        generated for explicit deletes (DeleteItem, BatchWriteItem) as well
+        as TTL-expired items. TTL deletions are indicated by a
+        userIdentity field with principalId 'dynamodb.amazonaws.com'.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/StreamRecord'
+      examples:
+        - name: DeleteUser
+          summary: User item deleted from table
+          payload:
+            eventID: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6'
+            eventName: REMOVE
+            eventVersion: '1.1'
+            eventSource: 'aws:dynamodb'
+            awsRegion: us-east-1
+            dynamodb:
+              ApproximateCreationDateTime: 1709486520
+              Keys:
+                UserId:
+                  S: 'user-123'
+              OldImage:
+                UserId:
+                  S: 'user-123'
+                Name:
+                  S: 'Jane Doe'
+                Email:
+                  S: 'jane.doe@example.com'
+              SequenceNumber: '333'
+              SizeBytes: 256
+              StreamViewType: NEW_AND_OLD_IMAGES
+            eventSourceARN: 'arn:aws:dynamodb:us-east-1:123456789012:table/Users/stream/2026-03-03T00:00:00.000'
+        - name: TTLExpiredItem
+          summary: Item removed due to TTL expiration
+          payload:
+            eventID: 'f1e2d3c4b5a6f7e8d9c0b1a2f3e4d5c6'
+            eventName: REMOVE
+            eventVersion: '1.1'
+            eventSource: 'aws:dynamodb'
+            awsRegion: us-east-1
+            userIdentity:
+              type: Service
+              principalId: dynamodb.amazonaws.com
+            dynamodb:
+              ApproximateCreationDateTime: 1709486580
+              Keys:
+                SessionId:
+                  S: 'session-abc'
+              OldImage:
+                SessionId:
+                  S: 'session-abc'
+                TTL:
+                  N: '1709400000'
+              SequenceNumber: '444'
+              SizeBytes: 128
+              StreamViewType: NEW_AND_OLD_IMAGES
+            eventSourceARN: 'arn:aws:dynamodb:us-east-1:123456789012:table/Sessions/stream/2026-03-03T00:00:00.000'
+
+    LambdaStreamEvent:
+      name: LambdaStreamEvent
+      title: Lambda DynamoDB Stream Event
+      summary: Batch of DynamoDB stream records delivered to a Lambda function
+      description: >-
+        When DynamoDB Streams is configured as a Lambda event source, the
+        Lambda service polls the stream and batches records together before
+        invoking the function. The event contains an array of stream records
+        in the Records field. The batch size is configurable from 1 to 10000
+        records.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LambdaEvent'
+
+  schemas:
+    AttributeValue:
+      type: object
+      description: >-
+        Represents the data for an attribute. DynamoDB sends attribute values
+        using the DynamoDB JSON format with type descriptors.
+      properties:
+        S:
+          type: string
+          description: String type attribute
+        N:
+          type: string
+          description: Number type attribute (sent as string for precision)
+        B:
+          type: string
+          description: Binary type attribute (Base64-encoded)
+        SS:
+          type: array
+          items:
+            type: string
+          description: String Set type attribute
+        NS:
+          type: array
+          items:
+            type: string
+          description: Number Set type attribute
+        BS:
+          type: array
+          items:
+            type: string
+          description: Binary Set type attribute
+        M:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: Map type attribute
+        L:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          description: List type attribute
+        'NULL':
+          type: boolean
+          description: Null type attribute
+        BOOL:
+          type: boolean
+          description: Boolean type attribute
+
+    StreamRecord:
+      type: object
+      description: >-
+        A description of a unique event within a stream. Each stream record
+        represents a single data modification in the DynamoDB table to which
+        the stream belongs.
+      required:
+        - eventID
+        - eventName
+        - eventVersion
+        - eventSource
+        - awsRegion
+        - dynamodb
+      properties:
+        eventID:
+          type: string
+          description: >-
+            A globally unique identifier for the event that was recorded in
+            this stream record
+        eventName:
+          type: string
+          enum:
+            - INSERT
+            - MODIFY
+            - REMOVE
+          description: >-
+            The type of data modification that was performed on the DynamoDB
+            table
+        eventVersion:
+          type: string
+          description: >-
+            The version number of the stream record format. Currently 1.1.
+          examples:
+            - '1.1'
+        eventSource:
+          type: string
+          description: The AWS service from which the stream record originated
+          const: 'aws:dynamodb'
+        awsRegion:
+          type: string
+          description: The AWS Region in which the event originated
+          examples:
+            - us-east-1
+        userIdentity:
+          type: object
+          description: >-
+            Present for REMOVE events caused by TTL expiration. Identifies the
+            DynamoDB service as the entity that performed the deletion.
+          properties:
+            type:
+              type: string
+              description: The type of identity
+              examples:
+                - Service
+            principalId:
+              type: string
+              description: The principal that performed the action
+              examples:
+                - dynamodb.amazonaws.com
+        dynamodb:
+          type: object
+          description: The main body of the stream record containing the DynamoDB-specific attributes
+          required:
+            - Keys
+            - SequenceNumber
+            - SizeBytes
+            - StreamViewType
+          properties:
+            ApproximateCreationDateTime:
+              type: integer
+              description: >-
+                The approximate date and time when the stream record was
+                created, in UNIX epoch time format (seconds)
+            Keys:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/AttributeValue'
+              description: >-
+                The primary key attribute(s) for the DynamoDB item that was
+                modified
+            NewImage:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/AttributeValue'
+              description: >-
+                The item in the table as it appeared after it was modified.
+                Present for INSERT and MODIFY events when StreamViewType is
+                NEW_IMAGE or NEW_AND_OLD_IMAGES.
+            OldImage:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/AttributeValue'
+              description: >-
+                The item in the table as it appeared before it was modified.
+                Present for MODIFY and REMOVE events when StreamViewType is
+                OLD_IMAGE or NEW_AND_OLD_IMAGES.
+            SequenceNumber:
+              type: string
+              description: The sequence number of the stream record
+            SizeBytes:
+              type: integer
+              description: >-
+                The size of the stream record in bytes
+            StreamViewType:
+              type: string
+              enum:
+                - KEYS_ONLY
+                - NEW_IMAGE
+                - OLD_IMAGE
+                - NEW_AND_OLD_IMAGES
+              description: >-
+                The type of data from the modified DynamoDB item captured in
+                this stream record
+        eventSourceARN:
+          type: string
+          description: >-
+            The ARN of the DynamoDB stream that this record belongs to
+          examples:
+            - 'arn:aws:dynamodb:us-east-1:123456789012:table/MyTable/stream/2026-03-03T00:00:00.000'
+
+    LambdaEvent:
+      type: object
+      description: >-
+        The event object that AWS Lambda receives when invoked by a DynamoDB
+        Streams event source mapping. Contains a batch of stream records.
+      required:
+        - Records
+      properties:
+        Records:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamRecord'
+          description: >-
+            An array of DynamoDB stream records. The batch size is determined
+            by the event source mapping configuration (1-10000 records).
+          minItems: 1
+          maxItems: 10000
+
+    StreamDescription:
+      type: object
+      description: >-
+        Represents all of the data describing a particular stream, returned
+        by the DescribeStream API operation.
+      properties:
+        StreamArn:
+          type: string
+          description: The ARN for the stream
+        StreamLabel:
+          type: string
+          description: >-
+            A timestamp in ISO 8601 format identifying the stream. Used as a
+            naming element in the stream ARN.
+        StreamStatus:
+          type: string
+          enum:
+            - ENABLING
+            - ENABLED
+            - DISABLING
+            - DISABLED
+          description: >-
+            Indicates the current status of the stream
+        StreamViewType:
+          type: string
+          enum:
+            - KEYS_ONLY
+            - NEW_IMAGE
+            - OLD_IMAGE
+            - NEW_AND_OLD_IMAGES
+          description: >-
+            Indicates the format of the records within this stream
+        CreationRequestDateTime:
+          type: string
+          format: date-time
+          description: The date and time when the request to create this stream was issued
+        TableName:
+          type: string
+          description: The DynamoDB table with which the stream is associated
+        KeySchema:
+          type: array
+          items:
+            type: object
+            properties:
+              AttributeName:
+                type: string
+              KeyType:
+                type: string
+                enum:
+                  - HASH
+                  - RANGE
+          description: The key attribute(s) of the DynamoDB table associated with the stream
+        Shards:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shard'
+          description: The shards that comprise the stream
+        LastEvaluatedShardId:
+          type: string
+          description: >-
+            The shard ID of the item where the operation stopped. Use this
+            value in a subsequent request to get the next set of shards.
+
+    Shard:
+      type: object
+      description: >-
+        A uniquely identified group of stream records within a stream. Shards
+        have a hierarchical parent-child relationship where child shards
+        contain records that were written after the parent shard.
+      properties:
+        ShardId:
+          type: string
+          description: The system-generated identifier for this shard
+        SequenceNumberRange:
+          type: object
+          properties:
+            StartingSequenceNumber:
+              type: string
+              description: The first sequence number for the stream records in the shard
+            EndingSequenceNumber:
+              type: string
+              description: >-
+                The last sequence number for the stream records in the shard.
+                Present only for closed shards.
+        ParentShardId:
+          type: string
+          description: The shard ID of the current shard's parent

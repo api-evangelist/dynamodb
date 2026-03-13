@@ -1,0 +1,701 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.apis.io/dynamodb/dynamodb-item-schema.json",
+  "title": "Amazon DynamoDB Item Schema",
+  "description": "JSON Schema for Amazon DynamoDB items, attribute values, table definitions, and stream records. DynamoDB uses a JSON-based data format with type descriptors where each attribute value is represented as a name-value pair with the name being the data type indicator (S, N, B, BOOL, NULL, L, M, SS, NS, BS).",
+  "type": "object",
+  "$defs": {
+    "AttributeValue": {
+      "title": "DynamoDB Attribute Value",
+      "description": "Represents the data for an attribute in DynamoDB JSON format. Each attribute value is described as a type-value pair where the key is the data type descriptor and the value is the actual data. DynamoDB supports scalar types (String, Number, Binary, Boolean, Null), document types (List, Map), and set types (String Set, Number Set, Binary Set).",
+      "type": "object",
+      "oneOf": [
+        {
+          "properties": {
+            "S": {
+              "type": "string",
+              "description": "An attribute of type String. Strings are Unicode with UTF-8 binary encoding. The maximum size is 400 KB."
+            }
+          },
+          "required": ["S"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "N": {
+              "type": "string",
+              "description": "An attribute of type Number. Numbers are sent across the network as strings to maximize compatibility. DynamoDB supports up to 38 digits of precision. Leading and trailing zeroes are trimmed.",
+              "pattern": "^-?\\d+\\.?\\d*([eE][+-]?\\d+)?$"
+            }
+          },
+          "required": ["N"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "B": {
+              "type": "string",
+              "description": "An attribute of type Binary. Binary data is encoded using Base64 before being sent to DynamoDB. The maximum size is 400 KB.",
+              "contentEncoding": "base64"
+            }
+          },
+          "required": ["B"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "SS": {
+              "type": "array",
+              "description": "An attribute of type String Set. Sets cannot contain duplicate elements. The order of elements is not preserved.",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": ["SS"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "NS": {
+              "type": "array",
+              "description": "An attribute of type Number Set. Numbers are sent as strings. Sets cannot contain duplicate elements.",
+              "items": {
+                "type": "string",
+                "pattern": "^-?\\d+\\.?\\d*([eE][+-]?\\d+)?$"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": ["NS"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "BS": {
+              "type": "array",
+              "description": "An attribute of type Binary Set. Binary data is Base64-encoded. Sets cannot contain duplicate elements.",
+              "items": {
+                "type": "string",
+                "contentEncoding": "base64"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": ["BS"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "M": {
+              "type": "object",
+              "description": "An attribute of type Map. A map is similar to a JSON object. There is no limit on the number of values, but the total size cannot exceed 400 KB.",
+              "additionalProperties": {
+                "$ref": "#/$defs/AttributeValue"
+              }
+            }
+          },
+          "required": ["M"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "L": {
+              "type": "array",
+              "description": "An attribute of type List. A list is similar to a JSON array. There is no limit on the number of values, but the total size cannot exceed 400 KB.",
+              "items": {
+                "$ref": "#/$defs/AttributeValue"
+              }
+            }
+          },
+          "required": ["L"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "NULL": {
+              "type": "boolean",
+              "description": "An attribute of type Null. When set to true, indicates a null value.",
+              "const": true
+            }
+          },
+          "required": ["NULL"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "BOOL": {
+              "type": "boolean",
+              "description": "An attribute of type Boolean."
+            }
+          },
+          "required": ["BOOL"],
+          "additionalProperties": false
+        }
+      ]
+    },
+
+    "DynamoDBItem": {
+      "title": "DynamoDB Item",
+      "description": "A DynamoDB item represented as a map of attribute names to attribute values. An item is a collection of attributes. Each attribute has a name and a value. Each item must have a primary key (partition key and optional sort key). The total item size cannot exceed 400 KB.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/AttributeValue"
+      },
+      "minProperties": 1
+    },
+
+    "PrimaryKey": {
+      "title": "DynamoDB Primary Key",
+      "description": "The primary key uniquely identifies each item in the table. A primary key consists of a partition key (HASH) and an optional sort key (RANGE). The partition key determines the partition where the item is stored. The sort key enables range-based queries within a partition.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/AttributeValue"
+      },
+      "minProperties": 1,
+      "maxProperties": 2
+    },
+
+    "AttributeDefinition": {
+      "title": "Attribute Definition",
+      "description": "Represents an attribute for describing the key schema for the table and indexes. Only attributes used in keys need to be defined.",
+      "type": "object",
+      "required": ["AttributeName", "AttributeType"],
+      "properties": {
+        "AttributeName": {
+          "type": "string",
+          "description": "A name for the attribute. Attribute names can be between 1 and 255 characters long.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "AttributeType": {
+          "type": "string",
+          "description": "The data type for the attribute. S = String, N = Number, B = Binary. These are the only types allowed for key attributes.",
+          "enum": ["S", "N", "B"]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "KeySchemaElement": {
+      "title": "Key Schema Element",
+      "description": "Represents a single element of a key schema. HASH is the partition key; RANGE is the sort key. A table must have exactly one HASH key and optionally one RANGE key.",
+      "type": "object",
+      "required": ["AttributeName", "KeyType"],
+      "properties": {
+        "AttributeName": {
+          "type": "string",
+          "description": "The name of a key attribute",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "KeyType": {
+          "type": "string",
+          "description": "The role that this key attribute will assume. HASH = partition key, RANGE = sort key.",
+          "enum": ["HASH", "RANGE"]
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "Projection": {
+      "title": "Index Projection",
+      "description": "Represents attributes that are copied (projected) from the table into an index. These are in addition to the primary key attributes and index key attributes, which are automatically projected.",
+      "type": "object",
+      "properties": {
+        "ProjectionType": {
+          "type": "string",
+          "description": "ALL projects every attribute into the index. KEYS_ONLY projects only the index and primary keys. INCLUDE projects the specified attributes in addition to keys.",
+          "enum": ["ALL", "KEYS_ONLY", "INCLUDE"]
+        },
+        "NonKeyAttributes": {
+          "type": "array",
+          "description": "A list of one or more non-key attribute names to project. Required only when ProjectionType is INCLUDE.",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "GlobalSecondaryIndex": {
+      "title": "Global Secondary Index",
+      "description": "Represents the properties of a global secondary index. A GSI has its own partition key and optional sort key, different from the base table. GSIs support eventually consistent reads and have their own provisioned throughput settings.",
+      "type": "object",
+      "required": ["IndexName", "KeySchema", "Projection"],
+      "properties": {
+        "IndexName": {
+          "type": "string",
+          "description": "The name of the global secondary index. Must be unique within the table.",
+          "minLength": 3,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "KeySchema": {
+          "type": "array",
+          "description": "The key schema for the global secondary index",
+          "items": {
+            "$ref": "#/$defs/KeySchemaElement"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "Projection": {
+          "$ref": "#/$defs/Projection"
+        },
+        "ProvisionedThroughput": {
+          "$ref": "#/$defs/ProvisionedThroughput"
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "LocalSecondaryIndex": {
+      "title": "Local Secondary Index",
+      "description": "Represents the properties of a local secondary index. A LSI shares the same partition key as the base table but has a different sort key. LSIs support both eventually consistent and strongly consistent reads. They must be created at table creation time.",
+      "type": "object",
+      "required": ["IndexName", "KeySchema", "Projection"],
+      "properties": {
+        "IndexName": {
+          "type": "string",
+          "description": "The name of the local secondary index",
+          "minLength": 3,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "KeySchema": {
+          "type": "array",
+          "description": "The key schema for the local secondary index. Must share the HASH key with the base table.",
+          "items": {
+            "$ref": "#/$defs/KeySchemaElement"
+          },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "Projection": {
+          "$ref": "#/$defs/Projection"
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "ProvisionedThroughput": {
+      "title": "Provisioned Throughput",
+      "description": "Represents the provisioned throughput settings for a table or index. Only applicable when BillingMode is PROVISIONED.",
+      "type": "object",
+      "required": ["ReadCapacityUnits", "WriteCapacityUnits"],
+      "properties": {
+        "ReadCapacityUnits": {
+          "type": "integer",
+          "description": "The maximum number of strongly consistent reads consumed per second before DynamoDB returns a ThrottlingException. Eventually consistent reads require half the capacity.",
+          "minimum": 1
+        },
+        "WriteCapacityUnits": {
+          "type": "integer",
+          "description": "The maximum number of writes consumed per second before DynamoDB returns a ThrottlingException.",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "StreamSpecification": {
+      "title": "Stream Specification",
+      "description": "Represents the DynamoDB Streams configuration for the table.",
+      "type": "object",
+      "required": ["StreamEnabled"],
+      "properties": {
+        "StreamEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether DynamoDB Streams is enabled (true) or disabled (false) on the table"
+        },
+        "StreamViewType": {
+          "type": "string",
+          "description": "Determines the information written to the stream. Required when StreamEnabled is true.",
+          "enum": ["NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"]
+        }
+      },
+      "additionalProperties": false,
+      "if": {
+        "properties": {
+          "StreamEnabled": { "const": true }
+        }
+      },
+      "then": {
+        "required": ["StreamEnabled", "StreamViewType"]
+      }
+    },
+
+    "TableDefinition": {
+      "title": "DynamoDB Table Definition",
+      "description": "Complete definition for creating a DynamoDB table including key schema, attribute definitions, throughput settings, and optional secondary indexes.",
+      "type": "object",
+      "required": ["TableName", "KeySchema", "AttributeDefinitions"],
+      "properties": {
+        "TableName": {
+          "type": "string",
+          "description": "The name of the table. Must be unique within a Region for a given AWS account. Names can contain 3-255 characters (a-z, A-Z, 0-9, underscore, hyphen, period).",
+          "minLength": 3,
+          "maxLength": 255,
+          "pattern": "^[a-zA-Z0-9_.-]+$"
+        },
+        "AttributeDefinitions": {
+          "type": "array",
+          "description": "An array of attributes that describe the key schema. Only define attributes used as key attributes in the table or indexes.",
+          "items": {
+            "$ref": "#/$defs/AttributeDefinition"
+          },
+          "minItems": 1
+        },
+        "KeySchema": {
+          "type": "array",
+          "description": "Specifies the attributes that make up the primary key. The first element must be the partition key (HASH). An optional second element is the sort key (RANGE).",
+          "items": {
+            "$ref": "#/$defs/KeySchemaElement"
+          },
+          "minItems": 1,
+          "maxItems": 2
+        },
+        "BillingMode": {
+          "type": "string",
+          "description": "Controls how you are charged for read/write throughput. PROVISIONED requires capacity planning. PAY_PER_REQUEST automatically scales.",
+          "enum": ["PROVISIONED", "PAY_PER_REQUEST"],
+          "default": "PROVISIONED"
+        },
+        "ProvisionedThroughput": {
+          "$ref": "#/$defs/ProvisionedThroughput"
+        },
+        "GlobalSecondaryIndexes": {
+          "type": "array",
+          "description": "One or more global secondary indexes to create. Maximum of 20 GSIs per table.",
+          "items": {
+            "$ref": "#/$defs/GlobalSecondaryIndex"
+          },
+          "maxItems": 20
+        },
+        "LocalSecondaryIndexes": {
+          "type": "array",
+          "description": "One or more local secondary indexes to create. Maximum of 5 LSIs per table. Can only be created at table creation time.",
+          "items": {
+            "$ref": "#/$defs/LocalSecondaryIndex"
+          },
+          "maxItems": 5
+        },
+        "StreamSpecification": {
+          "$ref": "#/$defs/StreamSpecification"
+        },
+        "SSESpecification": {
+          "type": "object",
+          "description": "Server-side encryption settings",
+          "properties": {
+            "Enabled": {
+              "type": "boolean"
+            },
+            "SSEType": {
+              "type": "string",
+              "enum": ["AES256", "KMS"]
+            },
+            "KMSMasterKeyId": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "Tags": {
+          "type": "array",
+          "description": "Tags to associate with the table for cost allocation",
+          "items": {
+            "type": "object",
+            "required": ["Key", "Value"],
+            "properties": {
+              "Key": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "Value": {
+                "type": "string",
+                "minLength": 0,
+                "maxLength": 256
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "TableClass": {
+          "type": "string",
+          "description": "The table class. STANDARD is the default. STANDARD_INFREQUENT_ACCESS is optimized for infrequently accessed data.",
+          "enum": ["STANDARD", "STANDARD_INFREQUENT_ACCESS"],
+          "default": "STANDARD"
+        },
+        "DeletionProtectionEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether deletion protection is enabled (true) or disabled (false) on the table",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "StreamRecord": {
+      "title": "DynamoDB Stream Record",
+      "description": "Represents a single stream record from DynamoDB Streams. Contains the event type, the affected item's key, and optionally the old and/or new images of the item.",
+      "type": "object",
+      "required": ["eventID", "eventName", "eventVersion", "eventSource", "awsRegion", "dynamodb"],
+      "properties": {
+        "eventID": {
+          "type": "string",
+          "description": "A globally unique identifier for the event"
+        },
+        "eventName": {
+          "type": "string",
+          "description": "The type of data modification",
+          "enum": ["INSERT", "MODIFY", "REMOVE"]
+        },
+        "eventVersion": {
+          "type": "string",
+          "description": "The version number of the stream record format"
+        },
+        "eventSource": {
+          "type": "string",
+          "description": "The originating AWS service",
+          "const": "aws:dynamodb"
+        },
+        "awsRegion": {
+          "type": "string",
+          "description": "The AWS Region in which the event originated"
+        },
+        "userIdentity": {
+          "type": "object",
+          "description": "Present for TTL-expired item removals",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "principalId": {
+              "type": "string"
+            }
+          }
+        },
+        "dynamodb": {
+          "type": "object",
+          "description": "The DynamoDB-specific attributes of the stream record",
+          "required": ["Keys", "SequenceNumber", "SizeBytes", "StreamViewType"],
+          "properties": {
+            "ApproximateCreationDateTime": {
+              "type": "integer",
+              "description": "Approximate creation time in UNIX epoch seconds"
+            },
+            "Keys": {
+              "type": "object",
+              "description": "The primary key attributes for the affected item",
+              "additionalProperties": {
+                "$ref": "#/$defs/AttributeValue"
+              }
+            },
+            "NewImage": {
+              "type": "object",
+              "description": "The item as it appeared after modification",
+              "additionalProperties": {
+                "$ref": "#/$defs/AttributeValue"
+              }
+            },
+            "OldImage": {
+              "type": "object",
+              "description": "The item as it appeared before modification",
+              "additionalProperties": {
+                "$ref": "#/$defs/AttributeValue"
+              }
+            },
+            "SequenceNumber": {
+              "type": "string",
+              "description": "The sequence number of the stream record"
+            },
+            "SizeBytes": {
+              "type": "integer",
+              "description": "The size of the stream record in bytes",
+              "minimum": 0
+            },
+            "StreamViewType": {
+              "type": "string",
+              "description": "The type of data captured in the stream record",
+              "enum": ["KEYS_ONLY", "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES"]
+            }
+          },
+          "additionalProperties": false
+        },
+        "eventSourceARN": {
+          "type": "string",
+          "description": "The ARN of the DynamoDB stream",
+          "pattern": "^arn:aws:dynamodb:.+:\\d{12}:table/.+/stream/.+$"
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "ConsumedCapacity": {
+      "title": "Consumed Capacity",
+      "description": "Represents the capacity units consumed by an operation. Returned when ReturnConsumedCapacity is specified.",
+      "type": "object",
+      "properties": {
+        "TableName": {
+          "type": "string",
+          "description": "The name of the table that was affected"
+        },
+        "CapacityUnits": {
+          "type": "number",
+          "description": "Total capacity units consumed",
+          "minimum": 0
+        },
+        "ReadCapacityUnits": {
+          "type": "number",
+          "description": "Read capacity units consumed",
+          "minimum": 0
+        },
+        "WriteCapacityUnits": {
+          "type": "number",
+          "description": "Write capacity units consumed",
+          "minimum": 0
+        },
+        "Table": {
+          "type": "object",
+          "properties": {
+            "ReadCapacityUnits": { "type": "number" },
+            "WriteCapacityUnits": { "type": "number" },
+            "CapacityUnits": { "type": "number" }
+          }
+        },
+        "LocalSecondaryIndexes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "ReadCapacityUnits": { "type": "number" },
+              "WriteCapacityUnits": { "type": "number" },
+              "CapacityUnits": { "type": "number" }
+            }
+          }
+        },
+        "GlobalSecondaryIndexes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "ReadCapacityUnits": { "type": "number" },
+              "WriteCapacityUnits": { "type": "number" },
+              "CapacityUnits": { "type": "number" }
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+
+  "properties": {
+    "item": {
+      "$ref": "#/$defs/DynamoDBItem",
+      "description": "A single DynamoDB item"
+    },
+    "key": {
+      "$ref": "#/$defs/PrimaryKey",
+      "description": "A primary key for identifying an item"
+    },
+    "tableDefinition": {
+      "$ref": "#/$defs/TableDefinition",
+      "description": "A complete DynamoDB table definition"
+    },
+    "streamRecord": {
+      "$ref": "#/$defs/StreamRecord",
+      "description": "A DynamoDB Streams record"
+    }
+  },
+  "examples": [
+    {
+      "item": {
+        "UserId": { "S": "user-123" },
+        "Name": { "S": "Jane Doe" },
+        "Email": { "S": "jane@example.com" },
+        "Age": { "N": "30" },
+        "IsActive": { "BOOL": true },
+        "Address": {
+          "M": {
+            "Street": { "S": "123 Main St" },
+            "City": { "S": "Seattle" },
+            "State": { "S": "WA" },
+            "Zip": { "S": "98101" }
+          }
+        },
+        "Tags": {
+          "SS": ["developer", "admin"]
+        },
+        "Scores": {
+          "NS": ["95", "87", "92"]
+        },
+        "OrderHistory": {
+          "L": [
+            { "S": "order-001" },
+            { "S": "order-002" }
+          ]
+        },
+        "MiddleName": { "NULL": true },
+        "CreatedAt": { "S": "2026-03-03T12:00:00Z" }
+      }
+    },
+    {
+      "tableDefinition": {
+        "TableName": "Users",
+        "AttributeDefinitions": [
+          { "AttributeName": "UserId", "AttributeType": "S" },
+          { "AttributeName": "Email", "AttributeType": "S" },
+          { "AttributeName": "CreatedAt", "AttributeType": "S" }
+        ],
+        "KeySchema": [
+          { "AttributeName": "UserId", "KeyType": "HASH" }
+        ],
+        "BillingMode": "PAY_PER_REQUEST",
+        "GlobalSecondaryIndexes": [
+          {
+            "IndexName": "EmailIndex",
+            "KeySchema": [
+              { "AttributeName": "Email", "KeyType": "HASH" }
+            ],
+            "Projection": {
+              "ProjectionType": "ALL"
+            }
+          }
+        ],
+        "LocalSecondaryIndexes": [
+          {
+            "IndexName": "CreatedAtIndex",
+            "KeySchema": [
+              { "AttributeName": "UserId", "KeyType": "HASH" },
+              { "AttributeName": "CreatedAt", "KeyType": "RANGE" }
+            ],
+            "Projection": {
+              "ProjectionType": "KEYS_ONLY"
+            }
+          }
+        ],
+        "StreamSpecification": {
+          "StreamEnabled": true,
+          "StreamViewType": "NEW_AND_OLD_IMAGES"
+        },
+        "Tags": [
+          { "Key": "Environment", "Value": "Production" },
+          { "Key": "Team", "Value": "Backend" }
+        ],
+        "DeletionProtectionEnabled": true
+      }
+    }
+  ]
+}
