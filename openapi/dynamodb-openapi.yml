@@ -48,32 +48,26 @@ servers:
 security:
   - aws_sigv4: []
 tags:
-  - name: Tables
-    description: Operations for creating, describing, updating, listing, and deleting DynamoDB tables
-  - name: Items
-    description: Operations for reading and writing individual items in DynamoDB tables
-  - name: Queries
-    description: Operations for querying and scanning items in DynamoDB tables
-  - name: Batch Operations
-    description: Operations for reading and writing multiple items in batch
-  - name: Transactions
-    description: Transactional read and write operations across multiple items and tables
-  - name: PartiQL
-    description: Execute SQL-compatible PartiQL statements against DynamoDB tables
-  - name: Indexes
-    description: Operations related to global and local secondary indexes
   - name: Backups
     description: Operations for creating, describing, listing, and deleting on-demand backups
-  - name: Global Tables
-    description: Operations for managing DynamoDB Global Tables
-  - name: TTL
-    description: Time to Live configuration for automatic item expiration
-  - name: Tags
-    description: Operations for tagging DynamoDB resources
+  - name: Batch Operations
+    description: Operations for reading and writing multiple items in batch
   - name: Exports
     description: Operations for exporting table data to Amazon S3
   - name: Imports
     description: Operations for importing data from Amazon S3 into DynamoDB tables
+  - name: Items
+    description: Operations for reading and writing individual items in DynamoDB tables
+  - name: PartiQL
+    description: Execute SQL-compatible PartiQL statements against DynamoDB tables
+  - name: Queries
+    description: Operations for querying and scanning items in DynamoDB tables
+  - name: Tables
+    description: Operations for creating, describing, updating, listing, and deleting DynamoDB tables
+  - name: Transactions
+    description: Transactional read and write operations across multiple items and tables
+  - name: TTL
+    description: Time to Live configuration for automatic item expiration
 paths:
   /:
     post:
@@ -978,8 +972,7 @@ paths:
         Associate a set of tags with an Amazon DynamoDB resource. You can then
         activate these user-defined tags so that they appear on the Billing and
         Cost Management console for cost allocation tracking.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - $ref: '#/components/parameters/X-Amz-Target-TagResource'
       requestBody:
@@ -1016,8 +1009,7 @@ paths:
       summary: Amazon DynamoDB Remove tags from a DynamoDB resource
       description: >-
         Removes the association of tags from an Amazon DynamoDB resource.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - $ref: '#/components/parameters/X-Amz-Target-UntagResource'
       requestBody:
@@ -1049,8 +1041,7 @@ paths:
       description: >-
         Lists all tags on an Amazon DynamoDB resource. You can call
         ListTagsOfResource up to 10 times per second, per account.
-      tags:
-        - Tags
+      tags: []
       parameters:
         - $ref: '#/components/parameters/X-Amz-Target-ListTagsOfResource'
       requestBody:
