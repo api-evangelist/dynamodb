@@ -78,7 +78,7 @@ paths:
   /:
     post:
       operationId: CreateTable
-      summary: Create a DynamoDB table
+      summary: Amazon DynamoDB Create a DynamoDB table
       description: >-
         Creates a new table in DynamoDB. The CreateTable operation adds a new
         table to your account. Table names must be unique within each Region.
@@ -130,7 +130,7 @@ paths:
   /#DescribeTable:
     post:
       operationId: DescribeTable
-      summary: Describe a DynamoDB table
+      summary: Amazon DynamoDB Describe a DynamoDB table
       description: >-
         Returns information about the table, including the current status of the
         table, when it was created, the primary key schema, and any indexes on
@@ -168,7 +168,7 @@ paths:
   /#UpdateTable:
     post:
       operationId: UpdateTable
-      summary: Update a DynamoDB table
+      summary: Amazon DynamoDB Update a DynamoDB table
       description: >-
         Modifies the provisioned throughput settings, global secondary indexes,
         or DynamoDB Streams settings for a given table. You can only perform one
@@ -214,7 +214,7 @@ paths:
   /#DeleteTable:
     post:
       operationId: DeleteTable
-      summary: Delete a DynamoDB table
+      summary: Amazon DynamoDB Delete a DynamoDB table
       description: >-
         Deletes a table and all of its items. After a DeleteTable request, the
         specified table is in the DELETING state until DynamoDB completes the
@@ -252,7 +252,7 @@ paths:
   /#ListTables:
     post:
       operationId: ListTables
-      summary: List DynamoDB tables
+      summary: Amazon DynamoDB List DynamoDB tables
       description: >-
         Returns an array of table names associated with the current account and
         endpoint. The output from ListTables is paginated, with each page
@@ -290,7 +290,7 @@ paths:
   /#PutItem:
     post:
       operationId: PutItem
-      summary: Create or replace an item
+      summary: Amazon DynamoDB Create or replace an item
       description: >-
         Creates a new item, or replaces an old item with a new item. If an item
         that has the same primary key as the new item already exists in the
@@ -336,7 +336,7 @@ paths:
   /#GetItem:
     post:
       operationId: GetItem
-      summary: Get an item by primary key
+      summary: Amazon DynamoDB Get an item by primary key
       description: >-
         Returns a set of attributes for the item with the given primary key. If
         there is no matching item, GetItem does not return any data and there
@@ -382,7 +382,7 @@ paths:
   /#UpdateItem:
     post:
       operationId: UpdateItem
-      summary: Update an item
+      summary: Amazon DynamoDB Update an item
       description: >-
         Edits an existing item's attributes, or adds a new item to the table if
         it does not already exist. You can put, delete, or add attribute values.
@@ -427,7 +427,7 @@ paths:
   /#DeleteItem:
     post:
       operationId: DeleteItem
-      summary: Delete an item
+      summary: Amazon DynamoDB Delete an item
       description: >-
         Deletes a single item in a table by primary key. You can perform a
         conditional delete operation that deletes the item if it exists, or if
@@ -471,7 +471,7 @@ paths:
   /#Query:
     post:
       operationId: Query
-      summary: Query items by primary key
+      summary: Amazon DynamoDB Query items by primary key
       description: >-
         Finds items based on primary key values. You can query a table, a local
         secondary index, or a global secondary index. You must provide a
@@ -517,7 +517,7 @@ paths:
   /#Scan:
     post:
       operationId: Scan
-      summary: Scan an entire table or index
+      summary: Amazon DynamoDB Scan an entire table or index
       description: >-
         Returns one or more items and item attributes by accessing every item in
         a table or a secondary index. Scan operations proceed sequentially. For
@@ -563,7 +563,7 @@ paths:
   /#BatchGetItem:
     post:
       operationId: BatchGetItem
-      summary: Get multiple items from one or more tables
+      summary: Amazon DynamoDB Get multiple items from one or more tables
       description: >-
         Returns the attributes of one or more items from one or more tables. You
         identify requested items by primary key. A single operation can retrieve
@@ -601,7 +601,7 @@ paths:
   /#BatchWriteItem:
     post:
       operationId: BatchWriteItem
-      summary: Put or delete multiple items in one or more tables
+      summary: Amazon DynamoDB Put or delete multiple items in one or more tables
       description: >-
         Puts or deletes multiple items in one or more tables. A single call to
         BatchWriteItem can transmit up to 16 MB of data over the network,
@@ -640,7 +640,7 @@ paths:
   /#TransactGetItems:
     post:
       operationId: TransactGetItems
-      summary: Get items in a transaction
+      summary: Amazon DynamoDB Get items in a transaction
       description: >-
         A synchronous operation that atomically retrieves multiple items from
         one or more tables (but not from indexes) in a single account and
@@ -679,7 +679,7 @@ paths:
   /#TransactWriteItems:
     post:
       operationId: TransactWriteItems
-      summary: Write items in a transaction
+      summary: Amazon DynamoDB Write items in a transaction
       description: >-
         A synchronous write operation that groups up to 100 action requests.
         These actions can target items in different tables, but not in different
@@ -719,7 +719,7 @@ paths:
   /#ExecuteStatement:
     post:
       operationId: ExecuteStatement
-      summary: Execute a PartiQL statement
+      summary: Amazon DynamoDB Execute a PartiQL statement
       description: >-
         Executes a single PartiQL statement against a DynamoDB table. You can
         run SQL-compatible queries against your DynamoDB data. PartiQL supports
@@ -757,7 +757,7 @@ paths:
   /#BatchExecuteStatement:
     post:
       operationId: BatchExecuteStatement
-      summary: Execute multiple PartiQL statements in a batch
+      summary: Amazon DynamoDB Execute multiple PartiQL statements in a batch
       description: >-
         Executes multiple PartiQL statements in a batch. Each statement in the
         batch runs independently and does not participate in a transaction. A
@@ -789,7 +789,7 @@ paths:
   /#ExecuteTransaction:
     post:
       operationId: ExecuteTransaction
-      summary: Execute PartiQL statements in a transaction
+      summary: Amazon DynamoDB Execute PartiQL statements in a transaction
       description: >-
         Executes one or more PartiQL statements in a transaction. The entire
         transaction must consist of either read statements or write statements;
@@ -823,7 +823,7 @@ paths:
   /#DescribeTimeToLive:
     post:
       operationId: DescribeTimeToLive
-      summary: Describe TTL settings for a table
+      summary: Amazon DynamoDB Describe TTL settings for a table
       description: >-
         Gives a description of the Time to Live (TTL) status on the specified
         table.
@@ -860,7 +860,7 @@ paths:
   /#UpdateTimeToLive:
     post:
       operationId: UpdateTimeToLive
-      summary: Enable or disable TTL on a table
+      summary: Amazon DynamoDB Enable or disable TTL on a table
       description: >-
         Enables or disables Time to Live (TTL) for the specified table. A
         successful UpdateTimeToLive call returns the current
@@ -899,7 +899,7 @@ paths:
   /#CreateBackup:
     post:
       operationId: CreateBackup
-      summary: Create an on-demand backup
+      summary: Amazon DynamoDB Create an on-demand backup
       description: >-
         Creates a backup for an existing table. Each time you create an
         on-demand backup, the entire table data is backed up.
@@ -942,7 +942,7 @@ paths:
   /#ListBackups:
     post:
       operationId: ListBackups
-      summary: List on-demand backups
+      summary: Amazon DynamoDB List on-demand backups
       description: >-
         Lists completed and pending backups for a DynamoDB table. The backups
         are returned in reverse chronological order by creation time.
@@ -973,7 +973,7 @@ paths:
   /#TagResource:
     post:
       operationId: TagResource
-      summary: Tag a DynamoDB resource
+      summary: Amazon DynamoDB Tag a DynamoDB resource
       description: >-
         Associate a set of tags with an Amazon DynamoDB resource. You can then
         activate these user-defined tags so that they appear on the Billing and
@@ -1013,7 +1013,7 @@ paths:
   /#UntagResource:
     post:
       operationId: UntagResource
-      summary: Remove tags from a DynamoDB resource
+      summary: Amazon DynamoDB Remove tags from a DynamoDB resource
       description: >-
         Removes the association of tags from an Amazon DynamoDB resource.
       tags:
@@ -1045,7 +1045,7 @@ paths:
   /#ListTagsOfResource:
     post:
       operationId: ListTagsOfResource
-      summary: List tags for a DynamoDB resource
+      summary: Amazon DynamoDB List tags for a DynamoDB resource
       description: >-
         Lists all tags on an Amazon DynamoDB resource. You can call
         ListTagsOfResource up to 10 times per second, per account.
@@ -1082,7 +1082,7 @@ paths:
   /#DescribeContinuousBackups:
     post:
       operationId: DescribeContinuousBackups
-      summary: Describe continuous backups and point-in-time recovery
+      summary: Amazon DynamoDB Describe continuous backups and point-in-time recovery
       description: >-
         Checks the status of continuous backups and point in time recovery on
         the specified table.
@@ -1119,7 +1119,7 @@ paths:
   /#ExportTableToPointInTime:
     post:
       operationId: ExportTableToPointInTime
-      summary: Export table data to S3
+      summary: Amazon DynamoDB Export table data to S3
       description: >-
         Exports table data to an S3 bucket. The table must have point in time
         recovery enabled. You can export data in DynamoDB JSON or Amazon Ion
@@ -1163,7 +1163,7 @@ paths:
   /#ImportTable:
     post:
       operationId: ImportTable
-      summary: Import data from S3 into a DynamoDB table
+      summary: Amazon DynamoDB Import data from S3 into a DynamoDB table
       description: >-
         Imports table data from an S3 bucket. The source data can be in
         DynamoDB JSON format, Amazon Ion format, or CSV format.
