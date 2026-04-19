@@ -1,0 +1,9 @@
+{
+  "TableName": "example_value",
+  "Key": "example_value",
+  "ConditionExpression": "example_value",
+  "ExpressionAttributeNames": "example_value",
+  "ExpressionAttributeValues": "example_value",
+  "ReturnValues": "example_value",
+  "ReturnConsumedCapacity": "example_value"
+}

@@ -1,0 +1,17 @@
+name: dynamodb API Vocabulary
+provider: dynamodb
+created: '2026-04-18'
+modified: '2026-04-18'
+operations: 28
+schemas: 69
+tags:
+- Backups
+- Batch Operations
+- Exports
+- Imports
+- Items
+- PartiQL
+- Queries
+- TTL
+- Tables
+- Transactions

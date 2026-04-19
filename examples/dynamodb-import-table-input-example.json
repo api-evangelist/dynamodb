@@ -1,0 +1,8 @@
+{
+  "ClientToken": "example_value",
+  "S3BucketSource": "example_value",
+  "InputFormat": "example_value",
+  "InputFormatOptions": "example_value",
+  "InputCompressionType": "example_value",
+  "TableCreationParameters": "example_value"
+}

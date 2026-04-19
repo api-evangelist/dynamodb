@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ItemCollectionMetrics",
+  "type": "object",
+  "properties": {
+    "ItemCollectionKey": {
+      "type": "object",
+      "description": "The partition key value of the item collection"
+    },
+    "SizeEstimateRangeGB": {
+      "type": "array",
+      "description": "An estimate of item collection size in gigabytes"
+    }
+  }
+}

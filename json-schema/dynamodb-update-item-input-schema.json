@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UpdateItemInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table containing the item to update"
+    },
+    "Key": {
+      "type": "object",
+      "description": "The primary key of the item to update"
+    },
+    "UpdateExpression": {
+      "type": "string",
+      "description": "An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them"
+    },
+    "ConditionExpression": {
+      "type": "string",
+      "description": "A condition that must be satisfied for the update to succeed"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object"
+    },
+    "ReturnValues": {
+      "type": "string",
+      "description": "Whether to return the item attributes as they appeared before or after the update"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "ReturnItemCollectionMetrics": {
+      "type": "string"
+    }
+  }
+}

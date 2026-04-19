@@ -1,0 +1,11 @@
+{
+  "TableName": "example_value",
+  "AttributeDefinitions": [],
+  "KeySchema": [],
+  "BillingMode": "example_value",
+  "GlobalSecondaryIndexes": [],
+  "LocalSecondaryIndexes": [],
+  "Tags": [],
+  "TableClass": "example_value",
+  "DeletionProtectionEnabled": true
+}

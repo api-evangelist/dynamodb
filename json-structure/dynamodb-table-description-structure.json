@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TableDescription",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "TableStatus": {
+      "type": "string"
+    },
+    "TableArn": {
+      "type": "string"
+    },
+    "TableId": {
+      "type": "string"
+    },
+    "TableSizeBytes": {
+      "type": "integer"
+    },
+    "ItemCount": {
+      "type": "integer"
+    },
+    "CreationDateTime": {
+      "type": "string"
+    },
+    "AttributeDefinitions": {
+      "type": "array"
+    },
+    "KeySchema": {
+      "type": "array"
+    },
+    "BillingModeSummary": {
+      "type": "object"
+    },
+    "GlobalSecondaryIndexes": {
+      "type": "array"
+    },
+    "LocalSecondaryIndexes": {
+      "type": "array"
+    },
+    "LatestStreamLabel": {
+      "type": "string"
+    },
+    "LatestStreamArn": {
+      "type": "string"
+    },
+    "DeletionProtectionEnabled": {
+      "type": "boolean"
+    },
+    "TableClassSummary": {
+      "type": "object"
+    },
+    "SSEDescription": {
+      "type": "object"
+    }
+  }
+}

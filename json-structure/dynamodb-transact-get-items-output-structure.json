@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TransactGetItemsOutput",
+  "type": "object",
+  "properties": {
+    "Responses": {
+      "type": "array"
+    },
+    "ConsumedCapacity": {
+      "type": "array"
+    }
+  }
+}

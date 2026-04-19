@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "AttributeValue",
+  "type": "object",
+  "properties": {
+    "S": {
+      "type": "string"
+    },
+    "N": {
+      "type": "string"
+    },
+    "B": {
+      "type": "string"
+    },
+    "SS": {
+      "type": "array"
+    },
+    "NS": {
+      "type": "array"
+    },
+    "BS": {
+      "type": "array"
+    },
+    "M": {
+      "type": "object"
+    },
+    "L": {
+      "type": "array"
+    },
+    "NULL": {
+      "type": "boolean"
+    },
+    "BOOL": {
+      "type": "boolean"
+    }
+  }
+}

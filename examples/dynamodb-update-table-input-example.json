@@ -1,0 +1,8 @@
+{
+  "TableName": "example_value",
+  "AttributeDefinitions": [],
+  "BillingMode": "example_value",
+  "GlobalSecondaryIndexUpdates": [],
+  "TableClass": "example_value",
+  "DeletionProtectionEnabled": true
+}

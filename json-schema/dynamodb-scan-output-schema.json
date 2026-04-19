@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScanOutput",
+  "type": "object",
+  "properties": {
+    "Items": {
+      "type": "array",
+      "description": "An array of item attributes that match the scan criteria"
+    },
+    "Count": {
+      "type": "integer",
+      "description": "The number of items in the response"
+    },
+    "ScannedCount": {
+      "type": "integer",
+      "description": "The number of items evaluated before any filter was applied"
+    },
+    "LastEvaluatedKey": {
+      "type": "object",
+      "description": "The primary key of the item where the operation stopped. Use this value for ExclusiveStartKey in a new request to continue the scan."
+    }
+  }
+}

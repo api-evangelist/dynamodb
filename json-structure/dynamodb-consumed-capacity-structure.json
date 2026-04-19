@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ConsumedCapacity",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "CapacityUnits": {
+      "type": "number"
+    },
+    "ReadCapacityUnits": {
+      "type": "number"
+    },
+    "WriteCapacityUnits": {
+      "type": "number"
+    },
+    "Table": {
+      "type": "object"
+    },
+    "LocalSecondaryIndexes": {
+      "type": "object"
+    },
+    "GlobalSecondaryIndexes": {
+      "type": "object"
+    }
+  }
+}

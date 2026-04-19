@@ -1,0 +1,7 @@
+{
+  "LastIncreaseDateTime": "example_value",
+  "LastDecreaseDateTime": "example_value",
+  "NumberOfDecreasesToday": 10,
+  "ReadCapacityUnits": 10,
+  "WriteCapacityUnits": 10
+}

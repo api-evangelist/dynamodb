@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetItemOutput",
+  "type": "object",
+  "properties": {
+    "Item": {
+      "type": "object",
+      "description": "A map of attribute names to AttributeValue objects. Only returned if the item with the given primary key exists."
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TableDescription",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table"
+    },
+    "TableStatus": {
+      "type": "string",
+      "description": "The current state of the table"
+    },
+    "TableArn": {
+      "type": "string",
+      "description": "The Amazon Resource Name (ARN) of the table"
+    },
+    "TableId": {
+      "type": "string",
+      "description": "Unique identifier for the table"
+    },
+    "TableSizeBytes": {
+      "type": "integer",
+      "description": "The total size of the specified table in bytes"
+    },
+    "ItemCount": {
+      "type": "integer",
+      "description": "The number of items in the specified table"
+    },
+    "CreationDateTime": {
+      "type": "string",
+      "description": "The date and time when the table was created"
+    },
+    "AttributeDefinitions": {
+      "type": "array",
+      "description": "An array of AttributeDefinition objects"
+    },
+    "KeySchema": {
+      "type": "array",
+      "description": "The primary key structure for the table"
+    },
+    "BillingModeSummary": {
+      "type": "object"
+    },
+    "GlobalSecondaryIndexes": {
+      "type": "array"
+    },
+    "LocalSecondaryIndexes": {
+      "type": "array"
+    },
+    "LatestStreamLabel": {
+      "type": "string",
+      "description": "A timestamp in ISO 8601 format of the stream label"
+    },
+    "LatestStreamArn": {
+      "type": "string",
+      "description": "The ARN of the latest DynamoDB stream"
+    },
+    "DeletionProtectionEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether deletion protection is enabled"
+    },
+    "TableClassSummary": {
+      "type": "object"
+    },
+    "SSEDescription": {
+      "type": "object"
+    }
+  }
+}

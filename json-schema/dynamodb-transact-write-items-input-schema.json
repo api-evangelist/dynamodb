@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransactWriteItemsInput",
+  "type": "object",
+  "properties": {
+    "TransactItems": {
+      "type": "array",
+      "description": "An ordered array of up to 100 TransactWriteItem objects"
+    },
+    "ClientRequestToken": {
+      "type": "string",
+      "description": "Unique identifier for the idempotency of the request"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "ReturnItemCollectionMetrics": {
+      "type": "string"
+    }
+  }
+}

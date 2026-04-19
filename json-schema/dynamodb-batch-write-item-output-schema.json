@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchWriteItemOutput",
+  "type": "object",
+  "properties": {
+    "UnprocessedItems": {
+      "type": "object",
+      "description": "A map of unprocessed items to retry"
+    },
+    "ItemCollectionMetrics": {
+      "type": "object"
+    },
+    "ConsumedCapacity": {
+      "type": "array"
+    }
+  }
+}

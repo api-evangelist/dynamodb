@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TagResourceInput",
+  "type": "object",
+  "properties": {
+    "ResourceArn": {
+      "type": "string",
+      "description": "ARN of the DynamoDB resource to tag"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to associate with the resource"
+    }
+  }
+}

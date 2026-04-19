@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Projection",
+  "type": "object",
+  "properties": {
+    "ProjectionType": {
+      "type": "string",
+      "description": "The set of attributes that are projected into the index"
+    },
+    "NonKeyAttributes": {
+      "type": "array",
+      "description": "List of non-key attribute names that are projected into the index"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "GetItemInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "Key": {
+      "type": "object"
+    },
+    "ProjectionExpression": {
+      "type": "string"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ConsistentRead": {
+      "type": "boolean"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

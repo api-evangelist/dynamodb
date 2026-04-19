@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "QueryInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "IndexName": {
+      "type": "string"
+    },
+    "KeyConditionExpression": {
+      "type": "string"
+    },
+    "FilterExpression": {
+      "type": "string"
+    },
+    "ProjectionExpression": {
+      "type": "string"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object"
+    },
+    "Select": {
+      "type": "string"
+    },
+    "ScanIndexForward": {
+      "type": "boolean"
+    },
+    "Limit": {
+      "type": "integer"
+    },
+    "ConsistentRead": {
+      "type": "boolean"
+    },
+    "ExclusiveStartKey": {
+      "type": "object"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

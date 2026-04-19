@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "StreamSpecification",
+  "type": "object",
+  "properties": {
+    "StreamEnabled": {
+      "type": "boolean"
+    },
+    "StreamViewType": {
+      "type": "string"
+    }
+  }
+}

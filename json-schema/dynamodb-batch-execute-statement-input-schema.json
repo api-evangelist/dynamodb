@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchExecuteStatementInput",
+  "type": "object",
+  "properties": {
+    "Statements": {
+      "type": "array",
+      "description": "The list of PartiQL statements representing the batch to run"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

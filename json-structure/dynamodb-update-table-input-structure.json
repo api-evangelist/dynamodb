@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "UpdateTableInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "AttributeDefinitions": {
+      "type": "array"
+    },
+    "BillingMode": {
+      "type": "string"
+    },
+    "GlobalSecondaryIndexUpdates": {
+      "type": "array"
+    },
+    "TableClass": {
+      "type": "string"
+    },
+    "DeletionProtectionEnabled": {
+      "type": "boolean"
+    }
+  }
+}

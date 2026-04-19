@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "PutItemInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "Item": {
+      "type": "object"
+    },
+    "ConditionExpression": {
+      "type": "string"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object"
+    },
+    "ReturnValues": {
+      "type": "string"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "ReturnItemCollectionMetrics": {
+      "type": "string"
+    }
+  }
+}

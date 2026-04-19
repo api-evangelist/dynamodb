@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListTagsOfResourceInput",
+  "type": "object",
+  "properties": {
+    "ResourceArn": {
+      "type": "string"
+    },
+    "NextToken": {
+      "type": "string"
+    }
+  }
+}

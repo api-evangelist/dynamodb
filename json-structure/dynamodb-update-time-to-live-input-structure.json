@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "UpdateTimeToLiveInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "TimeToLiveSpecification": {
+      "type": "object"
+    }
+  }
+}

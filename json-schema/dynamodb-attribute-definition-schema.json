@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AttributeDefinition",
+  "type": "object",
+  "properties": {
+    "AttributeName": {
+      "type": "string",
+      "description": "A name for the attribute"
+    },
+    "AttributeType": {
+      "type": "string",
+      "description": "The data type for the attribute: S (String), N (Number), B (Binary)"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "DeleteItemInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "Key": {
+      "type": "object"
+    },
+    "ConditionExpression": {
+      "type": "string"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object"
+    },
+    "ReturnValues": {
+      "type": "string"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

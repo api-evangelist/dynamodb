@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "GetItemInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table containing the requested item"
+    },
+    "Key": {
+      "type": "object",
+      "description": "A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve"
+    },
+    "ProjectionExpression": {
+      "type": "string",
+      "description": "A string that identifies one or more attributes to retrieve from the table"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object",
+      "description": "One or more substitution tokens for attribute names in an expression"
+    },
+    "ConsistentRead": {
+      "type": "boolean",
+      "description": "If set to true, the operation uses strongly consistent reads; otherwise, eventually consistent reads are used"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

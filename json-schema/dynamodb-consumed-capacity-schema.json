@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ConsumedCapacity",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table that was affected by the operation"
+    },
+    "CapacityUnits": {
+      "type": "number",
+      "description": "The total number of capacity units consumed by the operation"
+    },
+    "ReadCapacityUnits": {
+      "type": "number",
+      "description": "The total number of read capacity units consumed"
+    },
+    "WriteCapacityUnits": {
+      "type": "number",
+      "description": "The total number of write capacity units consumed"
+    },
+    "Table": {
+      "type": "object"
+    },
+    "LocalSecondaryIndexes": {
+      "type": "object"
+    },
+    "GlobalSecondaryIndexes": {
+      "type": "object"
+    }
+  }
+}

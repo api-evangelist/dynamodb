@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchGetItemInput",
+  "type": "object",
+  "properties": {
+    "RequestItems": {
+      "type": "object",
+      "description": "A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

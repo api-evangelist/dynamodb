@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "StreamSpecification",
+  "type": "object",
+  "properties": {
+    "StreamEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether DynamoDB Streams is enabled on the table"
+    },
+    "StreamViewType": {
+      "type": "string",
+      "description": "Determines the information written to the stream for this table"
+    }
+  }
+}

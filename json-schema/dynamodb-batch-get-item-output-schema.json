@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchGetItemOutput",
+  "type": "object",
+  "properties": {
+    "Responses": {
+      "type": "object",
+      "description": "A map of table name to a list of items"
+    },
+    "UnprocessedKeys": {
+      "type": "object",
+      "description": "A map of tables and their respective keys that were not processed. Retry these using exponential backoff."
+    },
+    "ConsumedCapacity": {
+      "type": "array"
+    }
+  }
+}

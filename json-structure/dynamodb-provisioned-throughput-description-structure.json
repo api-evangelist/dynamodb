@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ProvisionedThroughputDescription",
+  "type": "object",
+  "properties": {
+    "LastIncreaseDateTime": {
+      "type": "string"
+    },
+    "LastDecreaseDateTime": {
+      "type": "string"
+    },
+    "NumberOfDecreasesToday": {
+      "type": "integer"
+    },
+    "ReadCapacityUnits": {
+      "type": "integer"
+    },
+    "WriteCapacityUnits": {
+      "type": "integer"
+    }
+  }
+}

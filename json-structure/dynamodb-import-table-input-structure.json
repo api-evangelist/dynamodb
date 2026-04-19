@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ImportTableInput",
+  "type": "object",
+  "properties": {
+    "ClientToken": {
+      "type": "string"
+    },
+    "S3BucketSource": {
+      "type": "object"
+    },
+    "InputFormat": {
+      "type": "string"
+    },
+    "InputFormatOptions": {
+      "type": "object"
+    },
+    "InputCompressionType": {
+      "type": "string"
+    },
+    "TableCreationParameters": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "TableName": "example_value",
+  "Key": "example_value",
+  "ProjectionExpression": "example_value",
+  "ExpressionAttributeNames": "example_value",
+  "ConsistentRead": true,
+  "ReturnConsumedCapacity": "example_value"
+}

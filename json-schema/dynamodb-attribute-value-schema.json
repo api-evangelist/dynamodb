@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AttributeValue",
+  "type": "object",
+  "description": "Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. DynamoDB supports scalar types (String, Number, Binary, Boolean, Null), document types (List, Map), and set types (String Set, Number Set, Binary Set).",
+  "properties": {
+    "S": {
+      "type": "string",
+      "description": "An attribute of type String"
+    },
+    "N": {
+      "type": "string",
+      "description": "An attribute of type Number (sent as a string to preserve precision)"
+    },
+    "B": {
+      "type": "string",
+      "description": "An attribute of type Binary (Base64-encoded)"
+    },
+    "SS": {
+      "type": "array",
+      "description": "An attribute of type String Set"
+    },
+    "NS": {
+      "type": "array",
+      "description": "An attribute of type Number Set"
+    },
+    "BS": {
+      "type": "array",
+      "description": "An attribute of type Binary Set"
+    },
+    "M": {
+      "type": "object",
+      "description": "An attribute of type Map"
+    },
+    "L": {
+      "type": "array",
+      "description": "An attribute of type List"
+    },
+    "NULL": {
+      "type": "boolean",
+      "description": "An attribute of type Null"
+    },
+    "BOOL": {
+      "type": "boolean",
+      "description": "An attribute of type Boolean"
+    }
+  }
+}

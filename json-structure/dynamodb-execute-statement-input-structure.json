@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ExecuteStatementInput",
+  "type": "object",
+  "properties": {
+    "Statement": {
+      "type": "string"
+    },
+    "Parameters": {
+      "type": "array"
+    },
+    "ConsistentRead": {
+      "type": "boolean"
+    },
+    "NextToken": {
+      "type": "string"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "Limit": {
+      "type": "integer"
+    }
+  }
+}

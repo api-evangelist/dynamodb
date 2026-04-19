@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ErrorResponse",
+  "type": "object",
+  "properties": {
+    "__type": {
+      "type": "string",
+      "description": "The exception type"
+    },
+    "message": {
+      "type": "string",
+      "description": "A human-readable description of the error"
+    },
+    "Message": {
+      "type": "string",
+      "description": "A human-readable description of the error (alternative casing)"
+    }
+  }
+}

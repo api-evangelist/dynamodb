@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScanInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table containing the requested items"
+    },
+    "IndexName": {
+      "type": "string",
+      "description": "The name of a secondary index to scan"
+    },
+    "FilterExpression": {
+      "type": "string",
+      "description": "A string that contains conditions that DynamoDB applies after the Scan operation, but before the data is returned"
+    },
+    "ProjectionExpression": {
+      "type": "string",
+      "description": "A string that identifies attributes to retrieve from the table"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object"
+    },
+    "Select": {
+      "type": "string"
+    },
+    "Limit": {
+      "type": "integer",
+      "description": "The maximum number of items to evaluate"
+    },
+    "ConsistentRead": {
+      "type": "boolean",
+      "description": "Whether to use strongly consistent reads"
+    },
+    "ExclusiveStartKey": {
+      "type": "object",
+      "description": "The primary key of the first item for this scan to evaluate"
+    },
+    "Segment": {
+      "type": "integer",
+      "description": "Identifies an individual segment to be scanned by a parallel scan"
+    },
+    "TotalSegments": {
+      "type": "integer",
+      "description": "Total number of segments for a parallel scan"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchWriteItemInput",
+  "type": "object",
+  "properties": {
+    "RequestItems": {
+      "type": "object",
+      "description": "A map of one or more table names and, for each table, a list of operations to perform (PutRequest or DeleteRequest)"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "ReturnItemCollectionMetrics": {
+      "type": "string"
+    }
+  }
+}

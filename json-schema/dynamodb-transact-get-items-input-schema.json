@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TransactGetItemsInput",
+  "type": "object",
+  "properties": {
+    "TransactItems": {
+      "type": "array",
+      "description": "An ordered array of up to 100 TransactGetItem objects"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

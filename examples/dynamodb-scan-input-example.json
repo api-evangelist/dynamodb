@@ -1,0 +1,15 @@
+{
+  "TableName": "example_value",
+  "IndexName": "example_value",
+  "FilterExpression": "example_value",
+  "ProjectionExpression": "example_value",
+  "ExpressionAttributeNames": "example_value",
+  "ExpressionAttributeValues": "example_value",
+  "Select": "example_value",
+  "Limit": 10,
+  "ConsistentRead": true,
+  "ExclusiveStartKey": "example_value",
+  "Segment": 10,
+  "TotalSegments": 10,
+  "ReturnConsumedCapacity": "example_value"
+}

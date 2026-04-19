@@ -1,0 +1,8 @@
+{
+  "Statement": "example_value",
+  "Parameters": [],
+  "ConsistentRead": true,
+  "NextToken": "example_value",
+  "ReturnConsumedCapacity": "example_value",
+  "Limit": 10
+}

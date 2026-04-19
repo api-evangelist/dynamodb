@@ -1,0 +1,5 @@
+{
+  "RequestItems": "example_value",
+  "ReturnConsumedCapacity": "example_value",
+  "ReturnItemCollectionMetrics": "example_value"
+}

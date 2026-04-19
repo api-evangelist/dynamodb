@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProvisionedThroughputDescription",
+  "type": "object",
+  "properties": {
+    "LastIncreaseDateTime": {
+      "type": "string",
+      "description": "The date and time of the last provisioned throughput increase"
+    },
+    "LastDecreaseDateTime": {
+      "type": "string",
+      "description": "The date and time of the last provisioned throughput decrease"
+    },
+    "NumberOfDecreasesToday": {
+      "type": "integer",
+      "description": "The number of provisioned throughput decreases for this table during this UTC calendar day"
+    },
+    "ReadCapacityUnits": {
+      "type": "integer",
+      "description": "The maximum number of strongly consistent reads consumed per second"
+    },
+    "WriteCapacityUnits": {
+      "type": "integer",
+      "description": "The maximum number of writes consumed per second"
+    }
+  }
+}

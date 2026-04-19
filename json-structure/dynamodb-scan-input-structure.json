@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ScanInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string"
+    },
+    "IndexName": {
+      "type": "string"
+    },
+    "FilterExpression": {
+      "type": "string"
+    },
+    "ProjectionExpression": {
+      "type": "string"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object"
+    },
+    "Select": {
+      "type": "string"
+    },
+    "Limit": {
+      "type": "integer"
+    },
+    "ConsistentRead": {
+      "type": "boolean"
+    },
+    "ExclusiveStartKey": {
+      "type": "object"
+    },
+    "Segment": {
+      "type": "integer"
+    },
+    "TotalSegments": {
+      "type": "integer"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

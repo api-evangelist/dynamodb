@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "BatchExecuteStatementOutput",
+  "type": "object",
+  "properties": {
+    "Responses": {
+      "type": "array"
+    },
+    "ConsumedCapacity": {
+      "type": "array"
+    }
+  }
+}

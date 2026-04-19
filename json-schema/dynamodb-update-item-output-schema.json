@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UpdateItemOutput",
+  "type": "object",
+  "properties": {
+    "Attributes": {
+      "type": "object",
+      "description": "The attribute values as they appeared before or after the update"
+    }
+  }
+}

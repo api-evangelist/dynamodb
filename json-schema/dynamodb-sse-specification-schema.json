@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SSESpecification",
+  "type": "object",
+  "properties": {
+    "Enabled": {
+      "type": "boolean",
+      "description": "Indicates whether server-side encryption is enabled"
+    },
+    "SSEType": {
+      "type": "string",
+      "description": "Server-side encryption type"
+    },
+    "KMSMasterKeyId": {
+      "type": "string",
+      "description": "The KMS key that should be used for server-side encryption"
+    }
+  }
+}

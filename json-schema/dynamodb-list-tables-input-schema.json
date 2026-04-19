@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListTablesInput",
+  "type": "object",
+  "properties": {
+    "ExclusiveStartTableName": {
+      "type": "string",
+      "description": "The first table name that this operation will evaluate. Use the value returned for LastEvaluatedTableName in a previous operation."
+    },
+    "Limit": {
+      "type": "integer",
+      "description": "Maximum number of table names to return (1-100)"
+    }
+  }
+}

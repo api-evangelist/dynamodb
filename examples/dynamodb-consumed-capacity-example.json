@@ -1,0 +1,9 @@
+{
+  "TableName": "example_value",
+  "CapacityUnits": 42.5,
+  "ReadCapacityUnits": 42.5,
+  "WriteCapacityUnits": 42.5,
+  "Table": "example_value",
+  "LocalSecondaryIndexes": "example_value",
+  "GlobalSecondaryIndexes": "example_value"
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExportTableToPointInTimeInput",
+  "type": "object",
+  "properties": {
+    "TableArn": {
+      "type": "string",
+      "description": "ARN of the table to export"
+    },
+    "ExportTime": {
+      "type": "string",
+      "description": "Time in the past from which to export table data"
+    },
+    "ClientToken": {
+      "type": "string",
+      "description": "Idempotency token"
+    },
+    "S3Bucket": {
+      "type": "string",
+      "description": "Name of the S3 bucket to export to"
+    },
+    "S3BucketOwner": {
+      "type": "string",
+      "description": "Account ID of the S3 bucket owner"
+    },
+    "S3Prefix": {
+      "type": "string",
+      "description": "S3 key prefix for the export"
+    },
+    "S3SseAlgorithm": {
+      "type": "string"
+    },
+    "S3SseKmsKeyId": {
+      "type": "string"
+    },
+    "ExportFormat": {
+      "type": "string"
+    }
+  }
+}

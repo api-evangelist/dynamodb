@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "KeySchemaElement",
+  "type": "object",
+  "properties": {
+    "AttributeName": {
+      "type": "string",
+      "description": "The name of a key attribute"
+    },
+    "KeyType": {
+      "type": "string",
+      "description": "The role of the key attribute: HASH (partition key) or RANGE (sort key)"
+    }
+  }
+}

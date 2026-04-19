@@ -1,0 +1,280 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon DynamoDB Database Management"
+  description: "Unified workflow for managing DynamoDB tables, items, queries, batch operations, transactions, and backups. Used by backend developers and data engineers."
+  tags:
+    - AWS
+    - DynamoDB
+    - NoSQL
+    - Database Management
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+
+capability:
+  consumes:
+    - import: dynamodb
+      location: ./shared/dynamodb.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: dynamodb-management-api
+      description: "Unified REST API for DynamoDB database management."
+      resources:
+        - path: /v1/tables
+          name: tables
+          description: "Table management."
+          operations:
+            - method: GET
+              name: list-tables
+              description: "List tables."
+              call: "dynamodb.list-tables"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-table
+              description: "Create a table."
+              call: "dynamodb.create-table"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/tables/{id}
+          name: table-details
+          description: "Individual table management."
+          operations:
+            - method: GET
+              name: describe-table
+              description: "Describe a table."
+              call: "dynamodb.describe-table"
+              with:
+                tableName: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: PUT
+              name: update-table
+              description: "Update a table."
+              call: "dynamodb.update-table"
+              with:
+                tableName: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-table
+              description: "Delete a table."
+              call: "dynamodb.delete-table"
+              with:
+                tableName: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/items
+          name: items
+          description: "Item operations."
+          operations:
+            - method: POST
+              name: put-item
+              description: "Create or replace an item."
+              call: "dynamodb.put-item"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: GET
+              name: get-item
+              description: "Get an item."
+              call: "dynamodb.get-item"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/queries
+          name: queries
+          description: "Query operations."
+          operations:
+            - method: POST
+              name: query
+              description: "Query items."
+              call: "dynamodb.query"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: scan
+              description: "Scan a table."
+              call: "dynamodb.scan"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: dynamodb-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted DynamoDB database management."
+      tools:
+        - name: list-tables
+          description: "List DynamoDB tables."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "dynamodb.list-tables"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: describe-table
+          description: "Describe a DynamoDB table."
+          hints:
+            readOnly: true
+          call: "dynamodb.describe-table"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-table
+          description: "Create a new DynamoDB table."
+          hints:
+            readOnly: false
+          call: "dynamodb.create-table"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-table
+          description: "Delete a DynamoDB table."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "dynamodb.delete-table"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: put-item
+          description: "Create or replace an item."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "dynamodb.put-item"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-item
+          description: "Get an item by primary key."
+          hints:
+            readOnly: true
+          call: "dynamodb.get-item"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: update-item
+          description: "Update an item."
+          hints:
+            readOnly: false
+            idempotent: true
+          call: "dynamodb.update-item"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-item
+          description: "Delete an item."
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "dynamodb.delete-item"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query
+          description: "Query items by primary key."
+          hints:
+            readOnly: true
+          call: "dynamodb.query"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: scan
+          description: "Scan an entire table or index."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "dynamodb.scan"
+          with:
+            tableName: "tools.tableName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: batch-get-item
+          description: "Get multiple items from one or more tables."
+          hints:
+            readOnly: true
+          call: "dynamodb.batch-get-item"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: batch-write-item
+          description: "Put or delete multiple items in batch."
+          hints:
+            readOnly: false
+          call: "dynamodb.batch-write-item"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: transact-get-items
+          description: "Get items in a transaction."
+          hints:
+            readOnly: true
+          call: "dynamodb.transact-get-items"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: transact-write-items
+          description: "Write items in a transaction."
+          hints:
+            readOnly: false
+          call: "dynamodb.transact-write-items"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-backup
+          description: "Create an on-demand backup."
+          hints:
+            readOnly: false
+          call: "dynamodb.create-backup"
+          with:
+            tableName: "tools.tableName"
+            backupName: "tools.backupName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-backups
+          description: "List on-demand backups."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "dynamodb.list-backups"
+          outputParameters:
+            - type: object
+              mapping: "$."

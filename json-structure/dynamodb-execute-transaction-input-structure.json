@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "ExecuteTransactionInput",
+  "type": "object",
+  "properties": {
+    "TransactStatements": {
+      "type": "array"
+    },
+    "ClientRequestToken": {
+      "type": "string"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    }
+  }
+}

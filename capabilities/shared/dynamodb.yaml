@@ -1,0 +1,248 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Amazon DynamoDB API"
+  description: "Amazon DynamoDB API for managing NoSQL tables, items, queries, scans, and batch operations."
+  tags:
+    - AWS
+    - DynamoDB
+    - NoSQL
+    - Database
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: AWS_SECRET_ACCESS_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: dynamodb
+      baseUri: https://dynamodb.us-east-1.amazonaws.com
+      description: "Amazon DynamoDB API for NoSQL database operations."
+      authentication:
+        type: apikey
+        key: Authorization
+        value: "{{AWS_SIGV4}}"
+        placement: header
+      resources:
+        - name: tables
+          path: /
+          description: "Table management operations."
+          operations:
+            - name: create-table
+              method: POST
+              description: "Create a new DynamoDB table."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+            - name: describe-table
+              method: POST
+              description: "Describe a DynamoDB table."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+            - name: list-tables
+              method: POST
+              description: "List DynamoDB tables."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: update-table
+              method: POST
+              description: "Update a DynamoDB table."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+            - name: delete-table
+              method: POST
+              description: "Delete a DynamoDB table."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+        - name: items
+          path: /
+          description: "Item-level operations."
+          operations:
+            - name: put-item
+              method: POST
+              description: "Create or replace an item."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+                  Item: "{{tools.item}}"
+            - name: get-item
+              method: POST
+              description: "Get an item by primary key."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+                  Key: "{{tools.key}}"
+            - name: update-item
+              method: POST
+              description: "Update an item."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+                  Key: "{{tools.key}}"
+            - name: delete-item
+              method: POST
+              description: "Delete an item."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+                  Key: "{{tools.key}}"
+        - name: queries
+          path: /
+          description: "Query and scan operations."
+          operations:
+            - name: query
+              method: POST
+              description: "Query items by primary key."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+            - name: scan
+              method: POST
+              description: "Scan an entire table or index."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+        - name: batch-operations
+          path: /
+          description: "Batch read and write operations."
+          operations:
+            - name: batch-get-item
+              method: POST
+              description: "Get multiple items from one or more tables."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  RequestItems: "{{tools.requestItems}}"
+            - name: batch-write-item
+              method: POST
+              description: "Put or delete multiple items."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  RequestItems: "{{tools.requestItems}}"
+        - name: transactions
+          path: /
+          description: "Transactional operations."
+          operations:
+            - name: transact-get-items
+              method: POST
+              description: "Get items in a transaction."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: transact-write-items
+              method: POST
+              description: "Write items in a transaction."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: backups
+          path: /
+          description: "Backup operations."
+          operations:
+            - name: create-backup
+              method: POST
+              description: "Create an on-demand backup."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  TableName: "{{tools.tableName}}"
+                  BackupName: "{{tools.backupName}}"
+            - name: list-backups
+              method: POST
+              description: "List on-demand backups."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."

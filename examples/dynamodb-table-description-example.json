@@ -1,0 +1,19 @@
+{
+  "TableName": "example_value",
+  "TableStatus": "example_value",
+  "TableArn": "example_value",
+  "TableId": "500123",
+  "TableSizeBytes": 10,
+  "ItemCount": 10,
+  "CreationDateTime": "example_value",
+  "AttributeDefinitions": [],
+  "KeySchema": [],
+  "BillingModeSummary": "example_value",
+  "GlobalSecondaryIndexes": [],
+  "LocalSecondaryIndexes": [],
+  "LatestStreamLabel": "example_value",
+  "LatestStreamArn": "example_value",
+  "DeletionProtectionEnabled": true,
+  "TableClassSummary": "example_value",
+  "SSEDescription": "example_value"
+}

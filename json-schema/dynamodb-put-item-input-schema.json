@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PutItemInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table to contain the item"
+    },
+    "Item": {
+      "type": "object",
+      "description": "A map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required, but you can optionally provide other attribute name-value pairs."
+    },
+    "ConditionExpression": {
+      "type": "string",
+      "description": "A condition that must be satisfied in order for a conditional PutItem operation to succeed"
+    },
+    "ExpressionAttributeNames": {
+      "type": "object",
+      "description": "One or more substitution tokens for attribute names in an expression"
+    },
+    "ExpressionAttributeValues": {
+      "type": "object",
+      "description": "One or more values that can be substituted in an expression"
+    },
+    "ReturnValues": {
+      "type": "string",
+      "description": "Whether to return the item attributes as they appeared before the PutItem"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string",
+      "description": "Determines the level of detail about provisioned throughput consumption"
+    },
+    "ReturnItemCollectionMetrics": {
+      "type": "string",
+      "description": "Determines whether item collection metrics are returned"
+    }
+  }
+}

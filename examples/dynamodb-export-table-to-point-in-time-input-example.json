@@ -1,0 +1,11 @@
+{
+  "TableArn": "example_value",
+  "ExportTime": "example_value",
+  "ClientToken": "example_value",
+  "S3Bucket": "example_value",
+  "S3BucketOwner": "example_value",
+  "S3Prefix": "example_value",
+  "S3SseAlgorithm": "example_value",
+  "S3SseKmsKeyId": "500123",
+  "ExportFormat": "example_value"
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "KeySchemaElement",
+  "type": "object",
+  "properties": {
+    "AttributeName": {
+      "type": "string"
+    },
+    "KeyType": {
+      "type": "string"
+    }
+  }
+}

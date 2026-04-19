@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "TransactWriteItemsInput",
+  "type": "object",
+  "properties": {
+    "TransactItems": {
+      "type": "array"
+    },
+    "ClientRequestToken": {
+      "type": "string"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "ReturnItemCollectionMetrics": {
+      "type": "string"
+    }
+  }
+}

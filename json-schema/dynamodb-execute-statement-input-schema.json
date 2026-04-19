@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ExecuteStatementInput",
+  "type": "object",
+  "properties": {
+    "Statement": {
+      "type": "string",
+      "description": "The PartiQL statement representing the operation to run"
+    },
+    "Parameters": {
+      "type": "array",
+      "description": "The parameters for the PartiQL statement"
+    },
+    "ConsistentRead": {
+      "type": "boolean",
+      "description": "The consistency of a read operation"
+    },
+    "NextToken": {
+      "type": "string",
+      "description": "Set this value to get remaining results"
+    },
+    "ReturnConsumedCapacity": {
+      "type": "string"
+    },
+    "Limit": {
+      "type": "integer",
+      "description": "The maximum number of items to evaluate"
+    }
+  }
+}

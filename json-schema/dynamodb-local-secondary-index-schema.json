@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LocalSecondaryIndex",
+  "type": "object",
+  "properties": {
+    "IndexName": {
+      "type": "string",
+      "description": "The name of the local secondary index"
+    },
+    "KeySchema": {
+      "type": "array",
+      "description": "The key schema for the local secondary index"
+    }
+  }
+}

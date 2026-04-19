@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CreateTableInput",
+  "type": "object",
+  "properties": {
+    "TableName": {
+      "type": "string",
+      "description": "The name of the table to create. Must be between 3 and 255 characters long."
+    },
+    "AttributeDefinitions": {
+      "type": "array",
+      "description": "An array of attributes that describe the key schema for the table and indexes"
+    },
+    "KeySchema": {
+      "type": "array",
+      "description": "Specifies the attributes that make up the primary key for a table or an index"
+    },
+    "BillingMode": {
+      "type": "string",
+      "description": "Controls how you are charged for read and write throughput"
+    },
+    "GlobalSecondaryIndexes": {
+      "type": "array",
+      "description": "One or more global secondary indexes to create on the table"
+    },
+    "LocalSecondaryIndexes": {
+      "type": "array",
+      "description": "One or more local secondary indexes to create on the table"
+    },
+    "Tags": {
+      "type": "array",
+      "description": "Tags to associate with the table"
+    },
+    "TableClass": {
+      "type": "string",
+      "description": "The table class of the new table"
+    },
+    "DeletionProtectionEnabled": {
+      "type": "boolean",
+      "description": "Indicates whether deletion protection is enabled"
+    }
+  }
+}

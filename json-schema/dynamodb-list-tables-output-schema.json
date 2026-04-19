@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ListTablesOutput",
+  "type": "object",
+  "properties": {
+    "TableNames": {
+      "type": "array",
+      "description": "The names of the tables associated with the current account"
+    },
+    "LastEvaluatedTableName": {
+      "type": "string",
+      "description": "The name of the last table in the current page of results. Use this value as ExclusiveStartTableName for the next request."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-structure.org/draft/2020-12/schema",
+  "name": "BatchWriteItemOutput",
+  "type": "object",
+  "properties": {
+    "UnprocessedItems": {
+      "type": "object"
+    },
+    "ItemCollectionMetrics": {
+      "type": "object"
+    },
+    "ConsumedCapacity": {
+      "type": "array"
+    }
+  }
+}
