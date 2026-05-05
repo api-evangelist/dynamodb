@@ -1,0 +1,13 @@
+{
+  "repo": "dynamodb",
+  "feeds": [
+    {
+      "source": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/",
+      "feed_url": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/feed/",
+      "saved": 10,
+      "title": "Amazon DynamoDB \u2013 AWS Database Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:27:13Z"
+}
