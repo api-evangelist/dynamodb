@@ -155,6 +155,18 @@ common:
         description: Provision and manage DynamoDB tables as infrastructure as code.
       - name: Amazon CloudWatch
         description: Monitor table metrics, set alarms, and track performance with CloudWatch integration.
+  - type: Integrations
+    url: https://aws.amazon.com/marketplace
+integrations:
+  - name: Sign in
+  - name: Agent Mode
+  - name: 'Why AWS Marketplace?'
+  - name: Get started in AWS Marketplace
+  - name: Industry
+  - name: Resources
+  - name: Become a Channel Partner
+  - name: Sell in AWS Marketplace
+  - name: Manage Your Account
 maintainers:
   - name: Amazon Web Services
     email: aws-dynamodb@amazon.com
