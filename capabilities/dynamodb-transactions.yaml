@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon DynamoDB API — Transactions
+  description: 'Amazon DynamoDB API — Transactions. 3 operations. Lead operation: Amazon Dynamodb Execute Partiql Statements
+    in a Transaction. Self-contained Naftiko capability covering one Dynamodb business surface.'
+  tags:
+  - Dynamodb
+  - Transactions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DYNAMODB_API_KEY: DYNAMODB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dynamodb-transactions
+    baseUri: https://dynamodb.{region}.amazonaws.com
+    description: Amazon DynamoDB API — Transactions business capability. Self-contained, no shared references.
+    resources:
+    - name: '#ExecuteTransaction'
+      path: /#ExecuteTransaction
+      operations:
+      - name: executetransaction
+        method: POST
+        description: Amazon Dynamodb Execute Partiql Statements in a Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#TransactGetItems'
+      path: /#TransactGetItems
+      operations:
+      - name: transactgetitems
+        method: POST
+        description: Amazon Dynamodb Get Items in a Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#TransactWriteItems'
+      path: /#TransactWriteItems
+      operations:
+      - name: transactwriteitems
+        method: POST
+        description: Amazon Dynamodb Write Items in a Transaction
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.DYNAMODB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: dynamodb-transactions-rest
+    port: 8080
+    description: REST adapter for Amazon DynamoDB API — Transactions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/executetransaction
+      name: executetransaction
+      description: 'REST surface for #ExecuteTransaction.'
+      operations:
+      - method: POST
+        name: executetransaction
+        description: Amazon Dynamodb Execute Partiql Statements in a Transaction
+        call: dynamodb-transactions.executetransaction
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transactgetitems
+      name: transactgetitems
+      description: 'REST surface for #TransactGetItems.'
+      operations:
+      - method: POST
+        name: transactgetitems
+        description: Amazon Dynamodb Get Items in a Transaction
+        call: dynamodb-transactions.transactgetitems
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/transactwriteitems
+      name: transactwriteitems
+      description: 'REST surface for #TransactWriteItems.'
+      operations:
+      - method: POST
+        name: transactwriteitems
+        description: Amazon Dynamodb Write Items in a Transaction
+        call: dynamodb-transactions.transactwriteitems
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dynamodb-transactions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon DynamoDB API — Transactions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-dynamodb-execute-partiql-statements
+      description: Amazon Dynamodb Execute Partiql Statements in a Transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dynamodb-transactions.executetransaction
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-dynamodb-get-items-transaction
+      description: Amazon Dynamodb Get Items in a Transaction
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: dynamodb-transactions.transactgetitems
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-dynamodb-write-items-transaction
+      description: Amazon Dynamodb Write Items in a Transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dynamodb-transactions.transactwriteitems
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,82 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon DynamoDB API — Exports
+  description: 'Amazon DynamoDB API — Exports. 1 operations. Lead operation: Amazon Dynamodb Export Table Data to S3. Self-contained
+    Naftiko capability covering one Dynamodb business surface.'
+  tags:
+  - Dynamodb
+  - Exports
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DYNAMODB_API_KEY: DYNAMODB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dynamodb-exports
+    baseUri: https://dynamodb.{region}.amazonaws.com
+    description: Amazon DynamoDB API — Exports business capability. Self-contained, no shared references.
+    resources:
+    - name: '#ExportTableToPointInTime'
+      path: /#ExportTableToPointInTime
+      operations:
+      - name: exporttabletopointintime
+        method: POST
+        description: Amazon Dynamodb Export Table Data to S3
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.DYNAMODB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: dynamodb-exports-rest
+    port: 8080
+    description: REST adapter for Amazon DynamoDB API — Exports. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/exporttabletopointintime
+      name: exporttabletopointintime
+      description: 'REST surface for #ExportTableToPointInTime.'
+      operations:
+      - method: POST
+        name: exporttabletopointintime
+        description: Amazon Dynamodb Export Table Data to S3
+        call: dynamodb-exports.exporttabletopointintime
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dynamodb-exports-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon DynamoDB API — Exports. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-dynamodb-export-table-data
+      description: Amazon Dynamodb Export Table Data to S3
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dynamodb-exports.exporttabletopointintime
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

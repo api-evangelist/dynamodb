@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon DynamoDB API — Batch Operations
+  description: 'Amazon DynamoDB API — Batch Operations. 2 operations. Lead operation: Amazon Dynamodb Get Multiple Items From
+    One or More Tables. Self-contained Naftiko capability covering one Dynamodb business surface.'
+  tags:
+  - Dynamodb
+  - Batch Operations
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DYNAMODB_API_KEY: DYNAMODB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dynamodb-batch-operations
+    baseUri: https://dynamodb.{region}.amazonaws.com
+    description: Amazon DynamoDB API — Batch Operations business capability. Self-contained, no shared references.
+    resources:
+    - name: '#BatchGetItem'
+      path: /#BatchGetItem
+      operations:
+      - name: batchgetitem
+        method: POST
+        description: Amazon Dynamodb Get Multiple Items From One or More Tables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#BatchWriteItem'
+      path: /#BatchWriteItem
+      operations:
+      - name: batchwriteitem
+        method: POST
+        description: Amazon Dynamodb Put or Delete Multiple Items in One or More Tables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.DYNAMODB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: dynamodb-batch-operations-rest
+    port: 8080
+    description: REST adapter for Amazon DynamoDB API — Batch Operations. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/batchgetitem
+      name: batchgetitem
+      description: 'REST surface for #BatchGetItem.'
+      operations:
+      - method: POST
+        name: batchgetitem
+        description: Amazon Dynamodb Get Multiple Items From One or More Tables
+        call: dynamodb-batch-operations.batchgetitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/batchwriteitem
+      name: batchwriteitem
+      description: 'REST surface for #BatchWriteItem.'
+      operations:
+      - method: POST
+        name: batchwriteitem
+        description: Amazon Dynamodb Put or Delete Multiple Items in One or More Tables
+        call: dynamodb-batch-operations.batchwriteitem
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dynamodb-batch-operations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon DynamoDB API — Batch Operations. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-dynamodb-get-multiple-items
+      description: Amazon Dynamodb Get Multiple Items From One or More Tables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: dynamodb-batch-operations.batchgetitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-dynamodb-put-delete-multiple
+      description: Amazon Dynamodb Put or Delete Multiple Items in One or More Tables
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dynamodb-batch-operations.batchwriteitem
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

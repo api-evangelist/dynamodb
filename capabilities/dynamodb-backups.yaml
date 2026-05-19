@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon DynamoDB API — Backups
+  description: 'Amazon DynamoDB API — Backups. 3 operations. Lead operation: Amazon Dynamodb Create an On-demand Backup. Self-contained
+    Naftiko capability covering one Dynamodb business surface.'
+  tags:
+  - Dynamodb
+  - Backups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    DYNAMODB_API_KEY: DYNAMODB_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: dynamodb-backups
+    baseUri: https://dynamodb.{region}.amazonaws.com
+    description: Amazon DynamoDB API — Backups business capability. Self-contained, no shared references.
+    resources:
+    - name: '#CreateBackup'
+      path: /#CreateBackup
+      operations:
+      - name: createbackup
+        method: POST
+        description: Amazon Dynamodb Create an On-demand Backup
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#DescribeContinuousBackups'
+      path: /#DescribeContinuousBackups
+      operations:
+      - name: describecontinuousbackups
+        method: POST
+        description: Amazon Dynamodb Describe Continuous Backups and Point-in-time Recovery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#ListBackups'
+      path: /#ListBackups
+      operations:
+      - name: listbackups
+        method: POST
+        description: Amazon Dynamodb List On-demand Backups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.DYNAMODB_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: dynamodb-backups-rest
+    port: 8080
+    description: REST adapter for Amazon DynamoDB API — Backups. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/createbackup
+      name: createbackup
+      description: 'REST surface for #CreateBackup.'
+      operations:
+      - method: POST
+        name: createbackup
+        description: Amazon Dynamodb Create an On-demand Backup
+        call: dynamodb-backups.createbackup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/describecontinuousbackups
+      name: describecontinuousbackups
+      description: 'REST surface for #DescribeContinuousBackups.'
+      operations:
+      - method: POST
+        name: describecontinuousbackups
+        description: Amazon Dynamodb Describe Continuous Backups and Point-in-time Recovery
+        call: dynamodb-backups.describecontinuousbackups
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/listbackups
+      name: listbackups
+      description: 'REST surface for #ListBackups.'
+      operations:
+      - method: POST
+        name: listbackups
+        description: Amazon Dynamodb List On-demand Backups
+        call: dynamodb-backups.listbackups
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: dynamodb-backups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon DynamoDB API — Backups. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: amazon-dynamodb-create-demand-backup
+      description: Amazon Dynamodb Create an On-demand Backup
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dynamodb-backups.createbackup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-dynamodb-describe-continuous-backups
+      description: Amazon Dynamodb Describe Continuous Backups and Point-in-time Recovery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: dynamodb-backups.describecontinuousbackups
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-dynamodb-list-demand-backups
+      description: Amazon Dynamodb List On-demand Backups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: dynamodb-backups.listbackups
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
