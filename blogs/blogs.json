@@ -2,12 +2,20 @@
   "repo": "dynamodb",
   "feeds": [
     {
-      "source": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/",
+      "source": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/feed/",
       "feed_url": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/feed/",
-      "title": "Amazon DynamoDB \u2013 AWS Database Blog",
-      "saved": 16
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html",
+      "feed_url": "https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 26,
-  "fetched": "2026-05-17T20:20:35Z"
+  "post_count": 30,
+  "fetched": "2026-06-01T23:35:02Z"
 }
