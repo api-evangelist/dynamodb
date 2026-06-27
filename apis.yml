@@ -36,7 +36,7 @@ apis:
         url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
       - type: GettingStarted
         url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
-      - type: SDK
+      - type: SDKs
         url: https://aws.amazon.com/tools/
       - type: Pricing
         url: https://aws.amazon.com/dynamodb/pricing/
