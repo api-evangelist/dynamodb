@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/dynamodb-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: aws_sigv4
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed
+    using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+  sources:
+  - openapi/dynamodb-openapi.yml

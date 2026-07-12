@@ -99,6 +99,14 @@ apis:
         url: >-
           https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
 common:
+  - type: TrustCenter
+    url: security/dynamodb-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/dynamodb-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/dynamodb-domain-security.yml
+  - type: Authentication
+    url: authentication/dynamodb-authentication.yml
   - type: Blog
     url: https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/
   - type: Support
