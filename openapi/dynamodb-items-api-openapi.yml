@@ -1,0 +1,657 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups Items API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: Items
+  description: Operations for reading and writing individual items in DynamoDB tables
+paths:
+  /#PutItem:
+    post:
+      operationId: PutItem
+      summary: Amazon Dynamodb Create or Replace an Item
+      description: Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation by specifying a condition expression.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-PutItem'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/PutItemInput'
+      responses:
+        '200':
+          description: Item created or replaced successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/PutItemOutput'
+        '400':
+          description: Bad request or conditional check failed
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#GetItem:
+    post:
+      operationId: GetItem
+      summary: Amazon Dynamodb Get an Item by Primary Key
+      description: Returns a set of attributes for the item with the given primary key. If there is no matching item, GetItem does not return any data and there will be no Item element in the response. GetItem provides an eventually consistent read by default. You can optionally request a strongly consistent read instead.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-GetItem'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/GetItemInput'
+      responses:
+        '200':
+          description: Item returned successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/GetItemOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#UpdateItem:
+    post:
+      operationId: UpdateItem
+      summary: Amazon Dynamodb Update an Item
+      description: Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update by specifying an expected attribute value. You can use update expressions to update attributes.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-UpdateItem'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/UpdateItemInput'
+      responses:
+        '200':
+          description: Item updated successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/UpdateItemOutput'
+        '400':
+          description: Bad request or conditional check failed
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DeleteItem:
+    post:
+      operationId: DeleteItem
+      summary: Amazon Dynamodb Delete an Item
+      description: Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.
+      tags:
+      - Items
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-DeleteItem'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/DeleteItemInput'
+      responses:
+        '200':
+          description: Item deleted successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DeleteItemOutput'
+        '400':
+          description: Bad request or conditional check failed
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    UpdateItemOutput:
+      type: object
+      properties:
+        Attributes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The attribute values as they appeared before or after the update
+          example: example_value
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetrics'
+    GetItemOutput:
+      type: object
+      properties:
+        Item:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: A map of attribute names to AttributeValue objects. Only returned if the item with the given primary key exists.
+          example: example_value
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+    DeleteItemInput:
+      type: object
+      required:
+      - TableName
+      - Key
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table from which to delete the item
+          example: example_value
+        Key:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The primary key of the item to delete
+          example: example_value
+        ConditionExpression:
+          type: string
+          description: A condition that must be satisfied for the deletion to succeed
+          example: example_value
+        ExpressionAttributeNames:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        ExpressionAttributeValues:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          example: example_value
+        ReturnValues:
+          type: string
+          enum:
+          - NONE
+          - ALL_OLD
+          description: Whether to return the item attributes as they appeared before deletion
+          example: NONE
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+    PutItemInput:
+      type: object
+      required:
+      - TableName
+      - Item
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table to contain the item
+          example: example_value
+        Item:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: A map of attribute name/value pairs, one for each attribute. Only the primary key attributes are required, but you can optionally provide other attribute name-value pairs.
+          example: example_value
+        ConditionExpression:
+          type: string
+          description: A condition that must be satisfied in order for a conditional PutItem operation to succeed
+          example: example_value
+        ExpressionAttributeNames:
+          type: object
+          additionalProperties:
+            type: string
+          description: One or more substitution tokens for attribute names in an expression
+          example: example_value
+        ExpressionAttributeValues:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: One or more values that can be substituted in an expression
+          example: example_value
+        ReturnValues:
+          type: string
+          enum:
+          - NONE
+          - ALL_OLD
+          description: Whether to return the item attributes as they appeared before the PutItem
+          example: NONE
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          description: Determines the level of detail about provisioned throughput consumption
+          example: INDEXES
+        ReturnItemCollectionMetrics:
+          type: string
+          enum:
+          - SIZE
+          - NONE
+          description: Determines whether item collection metrics are returned
+          example: SIZE
+    ConsumedCapacity:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table that was affected by the operation
+          example: example_value
+        CapacityUnits:
+          type: number
+          description: The total number of capacity units consumed by the operation
+          example: 42.5
+        ReadCapacityUnits:
+          type: number
+          description: The total number of read capacity units consumed
+          example: 42.5
+        WriteCapacityUnits:
+          type: number
+          description: The total number of write capacity units consumed
+          example: 42.5
+        Table:
+          type: object
+          properties:
+            ReadCapacityUnits:
+              type: number
+            WriteCapacityUnits:
+              type: number
+            CapacityUnits:
+              type: number
+          example: example_value
+        LocalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+        GlobalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+    DeleteItemOutput:
+      type: object
+      properties:
+        Attributes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The attribute values as they appeared before the item was deleted
+          example: example_value
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetrics'
+    GetItemInput:
+      type: object
+      required:
+      - TableName
+      - Key
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table containing the requested item
+          example: example_value
+        Key:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve
+          example: example_value
+        ProjectionExpression:
+          type: string
+          description: A string that identifies one or more attributes to retrieve from the table
+          example: example_value
+        ExpressionAttributeNames:
+          type: object
+          additionalProperties:
+            type: string
+          description: One or more substitution tokens for attribute names in an expression
+          example: example_value
+        ConsistentRead:
+          type: boolean
+          description: If set to true, the operation uses strongly consistent reads; otherwise, eventually consistent reads are used
+          example: true
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+    UpdateItemInput:
+      type: object
+      required:
+      - TableName
+      - Key
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table containing the item to update
+          example: example_value
+        Key:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The primary key of the item to update
+          example: example_value
+        UpdateExpression:
+          type: string
+          description: An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them
+          example: example_value
+        ConditionExpression:
+          type: string
+          description: A condition that must be satisfied for the update to succeed
+          example: example_value
+        ExpressionAttributeNames:
+          type: object
+          additionalProperties:
+            type: string
+          example: example_value
+        ExpressionAttributeValues:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          example: example_value
+        ReturnValues:
+          type: string
+          enum:
+          - NONE
+          - UPDATED_OLD
+          - UPDATED_NEW
+          - ALL_OLD
+          - ALL_NEW
+          description: Whether to return the item attributes as they appeared before or after the update
+          example: NONE
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+        ReturnItemCollectionMetrics:
+          type: string
+          enum:
+          - SIZE
+          - NONE
+          example: SIZE
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    AttributeValue:
+      type: object
+      description: Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. DynamoDB supports scalar types (String, Number, Binary, Boolean, Null), document types (List, Map), and set types (String Set, Number Set, Binary Set).
+      properties:
+        S:
+          type: string
+          description: An attribute of type String
+          example: example_value
+        N:
+          type: string
+          description: An attribute of type Number (sent as a string to preserve precision)
+          example: example_value
+        B:
+          type: string
+          format: byte
+          description: An attribute of type Binary (Base64-encoded)
+          example: example_value
+        SS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type String Set
+          example: []
+        NS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type Number Set
+          example: []
+        BS:
+          type: array
+          items:
+            type: string
+            format: byte
+          description: An attribute of type Binary Set
+          example: []
+        M:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type Map
+          example: example_value
+        L:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type List
+          example: []
+        'NULL':
+          type: boolean
+          description: An attribute of type Null
+          example: true
+        BOOL:
+          type: boolean
+          description: An attribute of type Boolean
+          example: true
+    ItemCollectionMetrics:
+      type: object
+      properties:
+        ItemCollectionKey:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The partition key value of the item collection
+          example: example_value
+        SizeEstimateRangeGB:
+          type: array
+          items:
+            type: number
+          description: An estimate of item collection size in gigabytes
+          example: []
+    PutItemOutput:
+      type: object
+      properties:
+        Attributes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The attribute values as they appeared before the PutItem operation
+          example: example_value
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        ItemCollectionMetrics:
+          $ref: '#/components/schemas/ItemCollectionMetrics'
+  parameters:
+    X-Amz-Target-GetItem:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.GetItem
+    X-Amz-Target-DeleteItem:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.DeleteItem
+    X-Amz-Target-PutItem:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.PutItem
+    X-Amz-Target-UpdateItem:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.UpdateItem
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html

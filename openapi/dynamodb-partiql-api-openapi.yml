@@ -1,0 +1,488 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups PartiQL API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: PartiQL
+  description: Execute SQL-compatible PartiQL statements against DynamoDB tables
+paths:
+  /#ExecuteStatement:
+    post:
+      operationId: ExecuteStatement
+      summary: Amazon Dynamodb Execute a Partiql Statement
+      description: Executes a single PartiQL statement against a DynamoDB table. You can run SQL-compatible queries against your DynamoDB data. PartiQL supports SELECT, INSERT, UPDATE, and DELETE statements.
+      tags:
+      - PartiQL
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ExecuteStatement'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ExecuteStatementInput'
+      responses:
+        '200':
+          description: Statement executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ExecuteStatementOutput'
+        '400':
+          description: Bad request or conditional check failed
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#BatchExecuteStatement:
+    post:
+      operationId: BatchExecuteStatement
+      summary: Amazon Dynamodb Execute Multiple Partiql Statements in a Batch
+      description: Executes multiple PartiQL statements in a batch. Each statement in the batch runs independently and does not participate in a transaction. A batch can contain up to 25 statements.
+      tags:
+      - PartiQL
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-BatchExecuteStatement'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/BatchExecuteStatementInput'
+      responses:
+        '200':
+          description: Batch statement executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/BatchExecuteStatementOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#ExecuteTransaction:
+    post:
+      operationId: ExecuteTransaction
+      summary: Amazon Dynamodb Execute Partiql Statements in a Transaction
+      description: Executes one or more PartiQL statements in a transaction. The entire transaction must consist of either read statements or write statements; you cannot mix both in one transaction. A transaction can contain up to 100 PartiQL statements.
+      tags:
+      - PartiQL
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ExecuteTransaction'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ExecuteTransactionInput'
+      responses:
+        '200':
+          description: Transaction executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ExecuteTransactionOutput'
+        '400':
+          description: Bad request or transaction cancelled
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ExecuteStatementInput:
+      type: object
+      required:
+      - Statement
+      properties:
+        Statement:
+          type: string
+          minLength: 1
+          maxLength: 8192
+          description: The PartiQL statement representing the operation to run
+          example: example_value
+        Parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          minItems: 1
+          description: The parameters for the PartiQL statement
+          example: []
+        ConsistentRead:
+          type: boolean
+          description: The consistency of a read operation
+          example: true
+        NextToken:
+          type: string
+          description: Set this value to get remaining results
+          example: example_value
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+        Limit:
+          type: integer
+          minimum: 1
+          description: The maximum number of items to evaluate
+          example: 10
+    ExecuteTransactionOutput:
+      type: object
+      properties:
+        Responses:
+          type: array
+          items:
+            type: object
+            properties:
+              Item:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/AttributeValue'
+          example: []
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+    ConsumedCapacity:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table that was affected by the operation
+          example: example_value
+        CapacityUnits:
+          type: number
+          description: The total number of capacity units consumed by the operation
+          example: 42.5
+        ReadCapacityUnits:
+          type: number
+          description: The total number of read capacity units consumed
+          example: 42.5
+        WriteCapacityUnits:
+          type: number
+          description: The total number of write capacity units consumed
+          example: 42.5
+        Table:
+          type: object
+          properties:
+            ReadCapacityUnits:
+              type: number
+            WriteCapacityUnits:
+              type: number
+            CapacityUnits:
+              type: number
+          example: example_value
+        LocalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+        GlobalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+    ExecuteStatementOutput:
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              $ref: '#/components/schemas/AttributeValue'
+          example: []
+        NextToken:
+          type: string
+          example: example_value
+        ConsumedCapacity:
+          $ref: '#/components/schemas/ConsumedCapacity'
+        LastEvaluatedKey:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          example: example_value
+    BatchExecuteStatementOutput:
+      type: object
+      properties:
+        Responses:
+          type: array
+          items:
+            type: object
+            properties:
+              Error:
+                type: object
+                properties:
+                  Code:
+                    type: string
+                  Message:
+                    type: string
+                  Item:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+              TableName:
+                type: string
+              Item:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/AttributeValue'
+          example: []
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    AttributeValue:
+      type: object
+      description: Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. DynamoDB supports scalar types (String, Number, Binary, Boolean, Null), document types (List, Map), and set types (String Set, Number Set, Binary Set).
+      properties:
+        S:
+          type: string
+          description: An attribute of type String
+          example: example_value
+        N:
+          type: string
+          description: An attribute of type Number (sent as a string to preserve precision)
+          example: example_value
+        B:
+          type: string
+          format: byte
+          description: An attribute of type Binary (Base64-encoded)
+          example: example_value
+        SS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type String Set
+          example: []
+        NS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type Number Set
+          example: []
+        BS:
+          type: array
+          items:
+            type: string
+            format: byte
+          description: An attribute of type Binary Set
+          example: []
+        M:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type Map
+          example: example_value
+        L:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type List
+          example: []
+        'NULL':
+          type: boolean
+          description: An attribute of type Null
+          example: true
+        BOOL:
+          type: boolean
+          description: An attribute of type Boolean
+          example: true
+    ExecuteTransactionInput:
+      type: object
+      required:
+      - TransactStatements
+      properties:
+        TransactStatements:
+          type: array
+          items:
+            type: object
+            required:
+            - Statement
+            properties:
+              Statement:
+                type: string
+                minLength: 1
+                maxLength: 8192
+              Parameters:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeValue'
+          minItems: 1
+          maxItems: 100
+          description: The list of PartiQL statements representing the transaction to run
+          example: []
+        ClientRequestToken:
+          type: string
+          minLength: 1
+          maxLength: 36
+          description: Unique identifier for idempotency
+          example: example_value
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+    BatchExecuteStatementInput:
+      type: object
+      required:
+      - Statements
+      properties:
+        Statements:
+          type: array
+          items:
+            type: object
+            required:
+            - Statement
+            properties:
+              Statement:
+                type: string
+                minLength: 1
+                maxLength: 8192
+              Parameters:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeValue'
+              ConsistentRead:
+                type: boolean
+          minItems: 1
+          maxItems: 25
+          description: The list of PartiQL statements representing the batch to run
+          example: []
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+  parameters:
+    X-Amz-Target-ExecuteStatement:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.ExecuteStatement
+    X-Amz-Target-ExecuteTransaction:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.ExecuteTransaction
+    X-Amz-Target-BatchExecuteStatement:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.BatchExecuteStatement
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html

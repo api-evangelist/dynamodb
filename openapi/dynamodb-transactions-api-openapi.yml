@@ -1,0 +1,587 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups Transactions API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: Transactions
+  description: Transactional read and write operations across multiple items and tables
+paths:
+  /#TransactGetItems:
+    post:
+      operationId: TransactGetItems
+      summary: Amazon Dynamodb Get Items in a Transaction
+      description: A synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A TransactGetItems call can contain up to 100 TransactGetItem objects, each of which contains a Get structure.
+      tags:
+      - Transactions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-TransactGetItems'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/TransactGetItemsInput'
+      responses:
+        '200':
+          description: Transactional get executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/TransactGetItemsOutput'
+        '400':
+          description: Bad request or transaction cancelled
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#TransactWriteItems:
+    post:
+      operationId: TransactWriteItems
+      summary: Amazon Dynamodb Write Items in a Transaction
+      description: A synchronous write operation that groups up to 100 action requests. These actions can target items in different tables, but not in different accounts or Regions. The actions are completed atomically so that either all of them succeed, or all of them fail. TransactWriteItems supports Put, Update, Delete, and ConditionCheck actions.
+      tags:
+      - Transactions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-TransactWriteItems'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/TransactWriteItemsInput'
+      responses:
+        '200':
+          description: Transactional write executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/TransactWriteItemsOutput'
+        '400':
+          description: Bad request or transaction cancelled
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#ExecuteTransaction:
+    post:
+      operationId: ExecuteTransaction
+      summary: Amazon Dynamodb Execute Partiql Statements in a Transaction
+      description: Executes one or more PartiQL statements in a transaction. The entire transaction must consist of either read statements or write statements; you cannot mix both in one transaction. A transaction can contain up to 100 PartiQL statements.
+      tags:
+      - Transactions
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ExecuteTransaction'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ExecuteTransactionInput'
+      responses:
+        '200':
+          description: Transaction executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ExecuteTransactionOutput'
+        '400':
+          description: Bad request or transaction cancelled
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ExecuteTransactionOutput:
+      type: object
+      properties:
+        Responses:
+          type: array
+          items:
+            type: object
+            properties:
+              Item:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/AttributeValue'
+          example: []
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+    TransactGetItemsInput:
+      type: object
+      required:
+      - TransactItems
+      properties:
+        TransactItems:
+          type: array
+          items:
+            type: object
+            required:
+            - Get
+            properties:
+              Get:
+                type: object
+                required:
+                - TableName
+                - Key
+                properties:
+                  TableName:
+                    type: string
+                  Key:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+                  ProjectionExpression:
+                    type: string
+                  ExpressionAttributeNames:
+                    type: object
+                    additionalProperties:
+                      type: string
+          minItems: 1
+          maxItems: 100
+          description: An ordered array of up to 100 TransactGetItem objects
+          example: []
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+    TransactWriteItemsInput:
+      type: object
+      required:
+      - TransactItems
+      properties:
+        TransactItems:
+          type: array
+          items:
+            type: object
+            properties:
+              ConditionCheck:
+                type: object
+                required:
+                - TableName
+                - Key
+                - ConditionExpression
+                properties:
+                  TableName:
+                    type: string
+                  Key:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+                  ConditionExpression:
+                    type: string
+                  ExpressionAttributeNames:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  ExpressionAttributeValues:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+              Put:
+                type: object
+                required:
+                - TableName
+                - Item
+                properties:
+                  TableName:
+                    type: string
+                  Item:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+                  ConditionExpression:
+                    type: string
+                  ExpressionAttributeNames:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  ExpressionAttributeValues:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+              Delete:
+                type: object
+                required:
+                - TableName
+                - Key
+                properties:
+                  TableName:
+                    type: string
+                  Key:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+                  ConditionExpression:
+                    type: string
+                  ExpressionAttributeNames:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  ExpressionAttributeValues:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+              Update:
+                type: object
+                required:
+                - TableName
+                - Key
+                - UpdateExpression
+                properties:
+                  TableName:
+                    type: string
+                  Key:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+                  UpdateExpression:
+                    type: string
+                  ConditionExpression:
+                    type: string
+                  ExpressionAttributeNames:
+                    type: object
+                    additionalProperties:
+                      type: string
+                  ExpressionAttributeValues:
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/AttributeValue'
+          minItems: 1
+          maxItems: 100
+          description: An ordered array of up to 100 TransactWriteItem objects
+          example: []
+        ClientRequestToken:
+          type: string
+          minLength: 1
+          maxLength: 36
+          description: Unique identifier for the idempotency of the request
+          example: example_value
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+        ReturnItemCollectionMetrics:
+          type: string
+          enum:
+          - SIZE
+          - NONE
+          example: SIZE
+    ConsumedCapacity:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table that was affected by the operation
+          example: example_value
+        CapacityUnits:
+          type: number
+          description: The total number of capacity units consumed by the operation
+          example: 42.5
+        ReadCapacityUnits:
+          type: number
+          description: The total number of read capacity units consumed
+          example: 42.5
+        WriteCapacityUnits:
+          type: number
+          description: The total number of write capacity units consumed
+          example: 42.5
+        Table:
+          type: object
+          properties:
+            ReadCapacityUnits:
+              type: number
+            WriteCapacityUnits:
+              type: number
+            CapacityUnits:
+              type: number
+          example: example_value
+        LocalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+        GlobalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    AttributeValue:
+      type: object
+      description: Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. DynamoDB supports scalar types (String, Number, Binary, Boolean, Null), document types (List, Map), and set types (String Set, Number Set, Binary Set).
+      properties:
+        S:
+          type: string
+          description: An attribute of type String
+          example: example_value
+        N:
+          type: string
+          description: An attribute of type Number (sent as a string to preserve precision)
+          example: example_value
+        B:
+          type: string
+          format: byte
+          description: An attribute of type Binary (Base64-encoded)
+          example: example_value
+        SS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type String Set
+          example: []
+        NS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type Number Set
+          example: []
+        BS:
+          type: array
+          items:
+            type: string
+            format: byte
+          description: An attribute of type Binary Set
+          example: []
+        M:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type Map
+          example: example_value
+        L:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type List
+          example: []
+        'NULL':
+          type: boolean
+          description: An attribute of type Null
+          example: true
+        BOOL:
+          type: boolean
+          description: An attribute of type Boolean
+          example: true
+    TransactGetItemsOutput:
+      type: object
+      properties:
+        Responses:
+          type: array
+          items:
+            type: object
+            properties:
+              Item:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/AttributeValue'
+          description: An ordered array of up to 100 ItemResponse objects
+          example: []
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+    ItemCollectionMetrics:
+      type: object
+      properties:
+        ItemCollectionKey:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The partition key value of the item collection
+          example: example_value
+        SizeEstimateRangeGB:
+          type: array
+          items:
+            type: number
+          description: An estimate of item collection size in gigabytes
+          example: []
+    ExecuteTransactionInput:
+      type: object
+      required:
+      - TransactStatements
+      properties:
+        TransactStatements:
+          type: array
+          items:
+            type: object
+            required:
+            - Statement
+            properties:
+              Statement:
+                type: string
+                minLength: 1
+                maxLength: 8192
+              Parameters:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AttributeValue'
+          minItems: 1
+          maxItems: 100
+          description: The list of PartiQL statements representing the transaction to run
+          example: []
+        ClientRequestToken:
+          type: string
+          minLength: 1
+          maxLength: 36
+          description: Unique identifier for idempotency
+          example: example_value
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+    TransactWriteItemsOutput:
+      type: object
+      properties:
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+        ItemCollectionMetrics:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ItemCollectionMetrics'
+          example: example_value
+  parameters:
+    X-Amz-Target-TransactWriteItems:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.TransactWriteItems
+    X-Amz-Target-ExecuteTransaction:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.ExecuteTransaction
+    X-Amz-Target-TransactGetItems:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.TransactGetItems
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html

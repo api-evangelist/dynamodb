@@ -1,0 +1,880 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups Tables API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: Tables
+  description: Operations for creating, describing, updating, listing, and deleting DynamoDB tables
+paths:
+  /:
+    post:
+      operationId: CreateTable
+      summary: Amazon Dynamodb Create a Dynamodb Table
+      description: Creates a new table in DynamoDB. The CreateTable operation adds a new table to your account. Table names must be unique within each Region. The table is created with the specified key schema, attribute definitions, provisioned throughput settings, and optional secondary indexes.
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-CreateTable'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/CreateTableInput'
+      responses:
+        '200':
+          description: Table creation initiated successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/CreateTableOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Resource already exists
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many requests - provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DescribeTable:
+    post:
+      operationId: DescribeTable
+      summary: Amazon Dynamodb Describe a Dynamodb Table
+      description: Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-DescribeTable'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/DescribeTableInput'
+      responses:
+        '200':
+          description: Table description returned successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DescribeTableOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#UpdateTable:
+    post:
+      operationId: UpdateTable
+      summary: Amazon Dynamodb Update a Dynamodb Table
+      description: 'Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table. You can only perform one of the following operations at once: modify provisioned throughput, enable/disable Streams, remove a global secondary index, or create a new global secondary index.'
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-UpdateTable'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/UpdateTableInput'
+      responses:
+        '200':
+          description: Table update initiated successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/UpdateTableOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Limit exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DeleteTable:
+    post:
+      operationId: DeleteTable
+      summary: Amazon Dynamodb Delete a Dynamodb Table
+      description: Deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. Any items in the table are deleted.
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-DeleteTable'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/DeleteTableInput'
+      responses:
+        '200':
+          description: Table deletion initiated successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DeleteTableOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#ListTables:
+    post:
+      operationId: ListTables
+      summary: Amazon Dynamodb List Dynamodb Tables
+      description: Returns an array of table names associated with the current account and endpoint. The output from ListTables is paginated, with each page returning a maximum number of 100 table names.
+      tags:
+      - Tables
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ListTables'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ListTablesInput'
+      responses:
+        '200':
+          description: List of tables returned successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListTablesOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    X-Amz-Target-DescribeTable:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.DescribeTable
+    X-Amz-Target-CreateTable:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.CreateTable
+    X-Amz-Target-DeleteTable:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.DeleteTable
+    X-Amz-Target-ListTables:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.ListTables
+    X-Amz-Target-UpdateTable:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.UpdateTable
+  schemas:
+    StreamSpecification:
+      type: object
+      required:
+      - StreamEnabled
+      properties:
+        StreamEnabled:
+          type: boolean
+          description: Indicates whether DynamoDB Streams is enabled on the table
+          example: true
+        StreamViewType:
+          type: string
+          enum:
+          - NEW_IMAGE
+          - OLD_IMAGE
+          - NEW_AND_OLD_IMAGES
+          - KEYS_ONLY
+          description: Determines the information written to the stream for this table
+          example: NEW_IMAGE
+    AttributeDefinition:
+      type: object
+      required:
+      - AttributeName
+      - AttributeType
+      properties:
+        AttributeName:
+          type: string
+          description: A name for the attribute
+          minLength: 1
+          maxLength: 255
+          example: example_value
+        AttributeType:
+          type: string
+          enum:
+          - S
+          - N
+          - B
+          description: 'The data type for the attribute: S (String), N (Number), B (Binary)'
+          example: S
+    SSESpecification:
+      type: object
+      properties:
+        Enabled:
+          type: boolean
+          description: Indicates whether server-side encryption is enabled
+          example: true
+        SSEType:
+          type: string
+          enum:
+          - AES256
+          - KMS
+          description: Server-side encryption type
+          example: AES256
+        KMSMasterKeyId:
+          type: string
+          description: The KMS key that should be used for server-side encryption
+          example: '500123'
+    ListTablesInput:
+      type: object
+      properties:
+        ExclusiveStartTableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The first table name that this operation will evaluate. Use the value returned for LastEvaluatedTableName in a previous operation.
+          example: example_value
+        Limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+          description: Maximum number of table names to return (1-100)
+          example: 10
+    CreateTableInput:
+      type: object
+      required:
+      - TableName
+      - KeySchema
+      - AttributeDefinitions
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          pattern: '[a-zA-Z0-9_.-]+'
+          description: The name of the table to create. Must be between 3 and 255 characters long.
+          example: example_value
+        AttributeDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeDefinition'
+          description: An array of attributes that describe the key schema for the table and indexes
+          example: []
+        KeySchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySchemaElement'
+          minItems: 1
+          maxItems: 2
+          description: Specifies the attributes that make up the primary key for a table or an index
+          example: []
+        BillingMode:
+          type: string
+          enum:
+          - PROVISIONED
+          - PAY_PER_REQUEST
+          description: Controls how you are charged for read and write throughput
+          example: PROVISIONED
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+        GlobalSecondaryIndexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalSecondaryIndex'
+          description: One or more global secondary indexes to create on the table
+          example: []
+        LocalSecondaryIndexes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalSecondaryIndex'
+          description: One or more local secondary indexes to create on the table
+          example: []
+        StreamSpecification:
+          $ref: '#/components/schemas/StreamSpecification'
+        SSESpecification:
+          $ref: '#/components/schemas/SSESpecification'
+        Tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: Tags to associate with the table
+          example: []
+        TableClass:
+          type: string
+          enum:
+          - STANDARD
+          - STANDARD_INFREQUENT_ACCESS
+          description: The table class of the new table
+          example: STANDARD
+        DeletionProtectionEnabled:
+          type: boolean
+          description: Indicates whether deletion protection is enabled
+          example: true
+    LocalSecondaryIndex:
+      type: object
+      required:
+      - IndexName
+      - KeySchema
+      - Projection
+      properties:
+        IndexName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the local secondary index
+          example: example_value
+        KeySchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySchemaElement'
+          minItems: 2
+          maxItems: 2
+          description: The key schema for the local secondary index
+          example: []
+        Projection:
+          $ref: '#/components/schemas/Projection'
+    DescribeTableInput:
+      type: object
+      required:
+      - TableName
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table to describe
+          example: example_value
+    ListTablesOutput:
+      type: object
+      properties:
+        TableNames:
+          type: array
+          items:
+            type: string
+          description: The names of the tables associated with the current account
+          example: []
+        LastEvaluatedTableName:
+          type: string
+          description: The name of the last table in the current page of results. Use this value as ExclusiveStartTableName for the next request.
+          example: example_value
+    ProvisionedThroughputDescription:
+      type: object
+      properties:
+        LastIncreaseDateTime:
+          type: string
+          format: date-time
+          description: The date and time of the last provisioned throughput increase
+          example: '2026-01-15T10:30:00Z'
+        LastDecreaseDateTime:
+          type: string
+          format: date-time
+          description: The date and time of the last provisioned throughput decrease
+          example: '2026-01-15T10:30:00Z'
+        NumberOfDecreasesToday:
+          type: integer
+          description: The number of provisioned throughput decreases for this table during this UTC calendar day
+          example: 10
+        ReadCapacityUnits:
+          type: integer
+          description: The maximum number of strongly consistent reads consumed per second
+          example: 10
+        WriteCapacityUnits:
+          type: integer
+          description: The maximum number of writes consumed per second
+          example: 10
+    TableDescription:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table
+          example: example_value
+        TableStatus:
+          type: string
+          enum:
+          - CREATING
+          - UPDATING
+          - DELETING
+          - ACTIVE
+          - INACCESSIBLE_ENCRYPTION_CREDENTIALS
+          - ARCHIVING
+          - ARCHIVED
+          description: The current state of the table
+          example: CREATING
+        TableArn:
+          type: string
+          description: The Amazon Resource Name (ARN) of the table
+          example: example_value
+        TableId:
+          type: string
+          description: Unique identifier for the table
+          example: '500123'
+        TableSizeBytes:
+          type: integer
+          description: The total size of the specified table in bytes
+          example: 10
+        ItemCount:
+          type: integer
+          description: The number of items in the specified table
+          example: 10
+        CreationDateTime:
+          type: string
+          format: date-time
+          description: The date and time when the table was created
+          example: '2026-01-15T10:30:00Z'
+        AttributeDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeDefinition'
+          description: An array of AttributeDefinition objects
+          example: []
+        KeySchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySchemaElement'
+          description: The primary key structure for the table
+          example: []
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughputDescription'
+        BillingModeSummary:
+          type: object
+          properties:
+            BillingMode:
+              type: string
+              enum:
+              - PROVISIONED
+              - PAY_PER_REQUEST
+            LastUpdateToPayPerRequestDateTime:
+              type: string
+              format: date-time
+          example: example_value
+        GlobalSecondaryIndexes:
+          type: array
+          items:
+            type: object
+            properties:
+              IndexName:
+                type: string
+              IndexStatus:
+                type: string
+                enum:
+                - CREATING
+                - UPDATING
+                - DELETING
+                - ACTIVE
+              KeySchema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeySchemaElement'
+              Projection:
+                $ref: '#/components/schemas/Projection'
+              IndexSizeBytes:
+                type: integer
+              ItemCount:
+                type: integer
+              IndexArn:
+                type: string
+              ProvisionedThroughput:
+                $ref: '#/components/schemas/ProvisionedThroughputDescription'
+          example: []
+        LocalSecondaryIndexes:
+          type: array
+          items:
+            type: object
+            properties:
+              IndexName:
+                type: string
+              KeySchema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeySchemaElement'
+              Projection:
+                $ref: '#/components/schemas/Projection'
+              IndexSizeBytes:
+                type: integer
+              ItemCount:
+                type: integer
+              IndexArn:
+                type: string
+          example: []
+        StreamSpecification:
+          $ref: '#/components/schemas/StreamSpecification'
+        LatestStreamLabel:
+          type: string
+          description: A timestamp in ISO 8601 format of the stream label
+          example: example_value
+        LatestStreamArn:
+          type: string
+          description: The ARN of the latest DynamoDB stream
+          example: example_value
+        DeletionProtectionEnabled:
+          type: boolean
+          description: Indicates whether deletion protection is enabled
+          example: true
+        TableClassSummary:
+          type: object
+          properties:
+            TableClass:
+              type: string
+              enum:
+              - STANDARD
+              - STANDARD_INFREQUENT_ACCESS
+            LastUpdateDateTime:
+              type: string
+              format: date-time
+          example: example_value
+        SSEDescription:
+          type: object
+          properties:
+            Status:
+              type: string
+              enum:
+              - ENABLING
+              - ENABLED
+              - DISABLING
+              - DISABLED
+              - UPDATING
+            SSEType:
+              type: string
+              enum:
+              - AES256
+              - KMS
+            KMSMasterKeyArn:
+              type: string
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    DeleteTableInput:
+      type: object
+      required:
+      - TableName
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table to delete
+          example: example_value
+    GlobalSecondaryIndex:
+      type: object
+      required:
+      - IndexName
+      - KeySchema
+      - Projection
+      properties:
+        IndexName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the global secondary index
+          example: example_value
+        KeySchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySchemaElement'
+          minItems: 1
+          maxItems: 2
+          description: The key schema for the global secondary index
+          example: []
+        Projection:
+          $ref: '#/components/schemas/Projection'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+    UpdateTableInput:
+      type: object
+      required:
+      - TableName
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the table to update
+          example: example_value
+        AttributeDefinitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeDefinition'
+          example: []
+        BillingMode:
+          type: string
+          enum:
+          - PROVISIONED
+          - PAY_PER_REQUEST
+          example: PROVISIONED
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+        GlobalSecondaryIndexUpdates:
+          type: array
+          items:
+            type: object
+            properties:
+              Update:
+                type: object
+                properties:
+                  IndexName:
+                    type: string
+                  ProvisionedThroughput:
+                    $ref: '#/components/schemas/ProvisionedThroughput'
+              Create:
+                $ref: '#/components/schemas/GlobalSecondaryIndex'
+              Delete:
+                type: object
+                properties:
+                  IndexName:
+                    type: string
+          example: []
+        StreamSpecification:
+          $ref: '#/components/schemas/StreamSpecification'
+        SSESpecification:
+          $ref: '#/components/schemas/SSESpecification'
+        TableClass:
+          type: string
+          enum:
+          - STANDARD
+          - STANDARD_INFREQUENT_ACCESS
+          example: STANDARD
+        DeletionProtectionEnabled:
+          type: boolean
+          example: true
+    CreateTableOutput:
+      type: object
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+    ProvisionedThroughput:
+      type: object
+      required:
+      - ReadCapacityUnits
+      - WriteCapacityUnits
+      properties:
+        ReadCapacityUnits:
+          type: integer
+          minimum: 1
+          description: The maximum number of strongly consistent reads consumed per second
+          example: 10
+        WriteCapacityUnits:
+          type: integer
+          minimum: 1
+          description: The maximum number of writes consumed per second
+          example: 10
+    Tag:
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          minLength: 1
+          maxLength: 128
+          description: The key of the tag
+          example: example_value
+        Value:
+          type: string
+          minLength: 0
+          maxLength: 256
+          description: The value of the tag
+          example: example_value
+    UpdateTableOutput:
+      type: object
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+    KeySchemaElement:
+      type: object
+      required:
+      - AttributeName
+      - KeyType
+      properties:
+        AttributeName:
+          type: string
+          description: The name of a key attribute
+          minLength: 1
+          maxLength: 255
+          example: example_value
+        KeyType:
+          type: string
+          enum:
+          - HASH
+          - RANGE
+          description: 'The role of the key attribute: HASH (partition key) or RANGE (sort key)'
+          example: HASH
+    Projection:
+      type: object
+      properties:
+        ProjectionType:
+          type: string
+          enum:
+          - ALL
+          - KEYS_ONLY
+          - INCLUDE
+          description: The set of attributes that are projected into the index
+          example: ALL
+        NonKeyAttributes:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 20
+          description: List of non-key attribute names that are projected into the index
+          example: []
+    DeleteTableOutput:
+      type: object
+      properties:
+        TableDescription:
+          $ref: '#/components/schemas/TableDescription'
+    DescribeTableOutput:
+      type: object
+      properties:
+        Table:
+          $ref: '#/components/schemas/TableDescription'
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html

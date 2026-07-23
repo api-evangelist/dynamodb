@@ -1,0 +1,372 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: Backups
+  description: Operations for creating, describing, listing, and deleting on-demand backups
+paths:
+  /#CreateBackup:
+    post:
+      operationId: CreateBackup
+      summary: Amazon Dynamodb Create an On-demand Backup
+      description: Creates a backup for an existing table. Each time you create an on-demand backup, the entire table data is backed up.
+      tags:
+      - Backups
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-CreateBackup'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/CreateBackupInput'
+      responses:
+        '200':
+          description: Backup creation initiated successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/CreateBackupOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Limit exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#ListBackups:
+    post:
+      operationId: ListBackups
+      summary: Amazon Dynamodb List On-demand Backups
+      description: Lists completed and pending backups for a DynamoDB table. The backups are returned in reverse chronological order by creation time.
+      tags:
+      - Backups
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ListBackups'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ListBackupsInput'
+      responses:
+        '200':
+          description: Backups listed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ListBackupsOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#DescribeContinuousBackups:
+    post:
+      operationId: DescribeContinuousBackups
+      summary: Amazon Dynamodb Describe Continuous Backups and Point-in-time Recovery
+      description: Checks the status of continuous backups and point in time recovery on the specified table.
+      tags:
+      - Backups
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-DescribeContinuousBackups'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/DescribeContinuousBackupsInput'
+      responses:
+        '200':
+          description: Continuous backup description returned successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/DescribeContinuousBackupsOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Table not found
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    CreateBackupOutput:
+      type: object
+      properties:
+        BackupDetails:
+          type: object
+          properties:
+            BackupArn:
+              type: string
+            BackupName:
+              type: string
+            BackupSizeBytes:
+              type: integer
+            BackupStatus:
+              type: string
+              enum:
+              - CREATING
+              - DELETED
+              - AVAILABLE
+            BackupType:
+              type: string
+              enum:
+              - USER
+              - SYSTEM
+              - AWS_BACKUP
+            BackupCreationDateTime:
+              type: string
+              format: date-time
+            BackupExpiryDateTime:
+              type: string
+              format: date-time
+          example: example_value
+    ListBackupsInput:
+      type: object
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          example: example_value
+        Limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+          example: 10
+        TimeRangeLowerBound:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        TimeRangeUpperBound:
+          type: string
+          format: date-time
+          example: '2026-01-15T10:30:00Z'
+        ExclusiveStartBackupArn:
+          type: string
+          example: example_value
+        BackupType:
+          type: string
+          enum:
+          - USER
+          - SYSTEM
+          - AWS_BACKUP
+          - ALL
+          example: USER
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    ListBackupsOutput:
+      type: object
+      properties:
+        BackupSummaries:
+          type: array
+          items:
+            type: object
+            properties:
+              TableName:
+                type: string
+              TableId:
+                type: string
+              TableArn:
+                type: string
+              BackupArn:
+                type: string
+              BackupName:
+                type: string
+              BackupCreationDateTime:
+                type: string
+                format: date-time
+              BackupExpiryDateTime:
+                type: string
+                format: date-time
+              BackupStatus:
+                type: string
+                enum:
+                - CREATING
+                - DELETED
+                - AVAILABLE
+              BackupType:
+                type: string
+                enum:
+                - USER
+                - SYSTEM
+                - AWS_BACKUP
+              BackupSizeBytes:
+                type: integer
+          example: []
+        LastEvaluatedBackupArn:
+          type: string
+          example: example_value
+    CreateBackupInput:
+      type: object
+      required:
+      - TableName
+      - BackupName
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          example: example_value
+        BackupName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: Specified name for the backup
+          example: example_value
+    DescribeContinuousBackupsOutput:
+      type: object
+      properties:
+        ContinuousBackupsDescription:
+          type: object
+          properties:
+            ContinuousBackupsStatus:
+              type: string
+              enum:
+              - ENABLED
+              - DISABLED
+            PointInTimeRecoveryDescription:
+              type: object
+              properties:
+                PointInTimeRecoveryStatus:
+                  type: string
+                  enum:
+                  - ENABLED
+                  - DISABLED
+                EarliestRestorableDateTime:
+                  type: string
+                  format: date-time
+                LatestRestorableDateTime:
+                  type: string
+                  format: date-time
+          example: example_value
+    DescribeContinuousBackupsInput:
+      type: object
+      required:
+      - TableName
+      properties:
+        TableName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          example: example_value
+  parameters:
+    X-Amz-Target-CreateBackup:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.CreateBackup
+    X-Amz-Target-DescribeContinuousBackups:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.DescribeContinuousBackups
+    X-Amz-Target-ListBackups:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.ListBackups
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html

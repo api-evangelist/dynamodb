@@ -1,0 +1,365 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups Imports API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: Imports
+  description: Operations for importing data from Amazon S3 into DynamoDB tables
+paths:
+  /#ImportTable:
+    post:
+      operationId: ImportTable
+      summary: Amazon Dynamodb Import Data From S3 Into a Dynamodb Table
+      description: Imports table data from an S3 bucket. The source data can be in DynamoDB JSON format, Amazon Ion format, or CSV format.
+      tags:
+      - Imports
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-ImportTable'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/ImportTableInput'
+      responses:
+        '200':
+          description: Import initiated successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ImportTableOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Limit exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    KeySchemaElement:
+      type: object
+      required:
+      - AttributeName
+      - KeyType
+      properties:
+        AttributeName:
+          type: string
+          description: The name of a key attribute
+          minLength: 1
+          maxLength: 255
+          example: example_value
+        KeyType:
+          type: string
+          enum:
+          - HASH
+          - RANGE
+          description: 'The role of the key attribute: HASH (partition key) or RANGE (sort key)'
+          example: HASH
+    ImportTableOutput:
+      type: object
+      properties:
+        ImportTableDescription:
+          type: object
+          properties:
+            ImportArn:
+              type: string
+            ImportStatus:
+              type: string
+              enum:
+              - IN_PROGRESS
+              - COMPLETED
+              - CANCELLING
+              - CANCELLED
+              - FAILED
+            TableArn:
+              type: string
+            TableId:
+              type: string
+            StartTime:
+              type: string
+              format: date-time
+            EndTime:
+              type: string
+              format: date-time
+            InputFormat:
+              type: string
+              enum:
+              - DYNAMODB_JSON
+              - ION
+              - CSV
+            ProcessedItemCount:
+              type: integer
+            ProcessedSizeBytes:
+              type: integer
+            ImportedItemCount:
+              type: integer
+            FailureCode:
+              type: string
+            FailureMessage:
+              type: string
+          example: example_value
+    Projection:
+      type: object
+      properties:
+        ProjectionType:
+          type: string
+          enum:
+          - ALL
+          - KEYS_ONLY
+          - INCLUDE
+          description: The set of attributes that are projected into the index
+          example: ALL
+        NonKeyAttributes:
+          type: array
+          items:
+            type: string
+          minItems: 1
+          maxItems: 20
+          description: List of non-key attribute names that are projected into the index
+          example: []
+    ProvisionedThroughput:
+      type: object
+      required:
+      - ReadCapacityUnits
+      - WriteCapacityUnits
+      properties:
+        ReadCapacityUnits:
+          type: integer
+          minimum: 1
+          description: The maximum number of strongly consistent reads consumed per second
+          example: 10
+        WriteCapacityUnits:
+          type: integer
+          minimum: 1
+          description: The maximum number of writes consumed per second
+          example: 10
+    AttributeDefinition:
+      type: object
+      required:
+      - AttributeName
+      - AttributeType
+      properties:
+        AttributeName:
+          type: string
+          description: A name for the attribute
+          minLength: 1
+          maxLength: 255
+          example: example_value
+        AttributeType:
+          type: string
+          enum:
+          - S
+          - N
+          - B
+          description: 'The data type for the attribute: S (String), N (Number), B (Binary)'
+          example: S
+    SSESpecification:
+      type: object
+      properties:
+        Enabled:
+          type: boolean
+          description: Indicates whether server-side encryption is enabled
+          example: true
+        SSEType:
+          type: string
+          enum:
+          - AES256
+          - KMS
+          description: Server-side encryption type
+          example: AES256
+        KMSMasterKeyId:
+          type: string
+          description: The KMS key that should be used for server-side encryption
+          example: '500123'
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    ImportTableInput:
+      type: object
+      required:
+      - S3BucketSource
+      - InputFormat
+      - TableCreationParameters
+      properties:
+        ClientToken:
+          type: string
+          description: Idempotency token
+          example: example_value
+        S3BucketSource:
+          type: object
+          required:
+          - S3Bucket
+          properties:
+            S3BucketOwner:
+              type: string
+            S3Bucket:
+              type: string
+            S3KeyPrefix:
+              type: string
+          example: example_value
+        InputFormat:
+          type: string
+          enum:
+          - DYNAMODB_JSON
+          - ION
+          - CSV
+          example: DYNAMODB_JSON
+        InputFormatOptions:
+          type: object
+          properties:
+            Csv:
+              type: object
+              properties:
+                Delimiter:
+                  type: string
+                HeaderList:
+                  type: array
+                  items:
+                    type: string
+          example: example_value
+        InputCompressionType:
+          type: string
+          enum:
+          - GZIP
+          - ZSTD
+          - NONE
+          example: GZIP
+        TableCreationParameters:
+          type: object
+          required:
+          - TableName
+          - AttributeDefinitions
+          - KeySchema
+          properties:
+            TableName:
+              type: string
+            AttributeDefinitions:
+              type: array
+              items:
+                $ref: '#/components/schemas/AttributeDefinition'
+            KeySchema:
+              type: array
+              items:
+                $ref: '#/components/schemas/KeySchemaElement'
+            BillingMode:
+              type: string
+              enum:
+              - PROVISIONED
+              - PAY_PER_REQUEST
+            ProvisionedThroughput:
+              $ref: '#/components/schemas/ProvisionedThroughput'
+            SSESpecification:
+              $ref: '#/components/schemas/SSESpecification'
+            GlobalSecondaryIndexes:
+              type: array
+              items:
+                $ref: '#/components/schemas/GlobalSecondaryIndex'
+          example: example_value
+    GlobalSecondaryIndex:
+      type: object
+      required:
+      - IndexName
+      - KeySchema
+      - Projection
+      properties:
+        IndexName:
+          type: string
+          minLength: 3
+          maxLength: 255
+          description: The name of the global secondary index
+          example: example_value
+        KeySchema:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySchemaElement'
+          minItems: 1
+          maxItems: 2
+          description: The key schema for the global secondary index
+          example: []
+        Projection:
+          $ref: '#/components/schemas/Projection'
+        ProvisionedThroughput:
+          $ref: '#/components/schemas/ProvisionedThroughput'
+  parameters:
+    X-Amz-Target-ImportTable:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.ImportTable
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html

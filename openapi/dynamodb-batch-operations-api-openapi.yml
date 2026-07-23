@@ -1,0 +1,446 @@
+openapi: 3.1.0
+info:
+  title: Amazon DynamoDB Backups Batch Operations API
+  description: Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.
+  version: '2012-08-10'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+- url: https://dynamodb.{region}.amazonaws.com
+  description: Amazon DynamoDB Regional Endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS Region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sigv4: []
+tags:
+- name: Batch Operations
+  description: Operations for reading and writing multiple items in batch
+paths:
+  /#BatchGetItem:
+    post:
+      operationId: BatchGetItem
+      summary: Amazon Dynamodb Get Multiple Items From One or More Tables
+      description: Returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-BatchGetItem'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/BatchGetItemInput'
+      responses:
+        '200':
+          description: Batch get executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/BatchGetItemOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /#BatchWriteItem:
+    post:
+      operationId: BatchWriteItem
+      summary: Amazon Dynamodb Put or Delete Multiple Items in One or More Tables
+      description: Puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can transmit up to 16 MB of data over the network, consisting of up to 25 put or delete requests. Individual items to be written can be as large as 400 KB.
+      tags:
+      - Batch Operations
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target-BatchWriteItem'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.0:
+            schema:
+              $ref: '#/components/schemas/BatchWriteItemInput'
+      responses:
+        '200':
+          description: Batch write executed successfully
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/BatchWriteItemOutput'
+        '400':
+          description: Bad request
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Provisioned throughput exceeded
+          content:
+            application/x-amz-json-1.0:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    X-Amz-Target-BatchGetItem:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.BatchGetItem
+    X-Amz-Target-BatchWriteItem:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+        enum:
+        - DynamoDB_20120810.BatchWriteItem
+  schemas:
+    BatchGetItemOutput:
+      type: object
+      properties:
+        Responses:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              additionalProperties:
+                $ref: '#/components/schemas/AttributeValue'
+          description: A map of table name to a list of items
+          example: example_value
+        UnprocessedKeys:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              Keys:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/AttributeValue'
+          description: A map of tables and their respective keys that were not processed. Retry these using exponential backoff.
+          example: example_value
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+    ConsumedCapacity:
+      type: object
+      properties:
+        TableName:
+          type: string
+          description: The name of the table that was affected by the operation
+          example: example_value
+        CapacityUnits:
+          type: number
+          description: The total number of capacity units consumed by the operation
+          example: 42.5
+        ReadCapacityUnits:
+          type: number
+          description: The total number of read capacity units consumed
+          example: 42.5
+        WriteCapacityUnits:
+          type: number
+          description: The total number of write capacity units consumed
+          example: 42.5
+        Table:
+          type: object
+          properties:
+            ReadCapacityUnits:
+              type: number
+            WriteCapacityUnits:
+              type: number
+            CapacityUnits:
+              type: number
+          example: example_value
+        LocalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+        GlobalSecondaryIndexes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ReadCapacityUnits:
+                type: number
+              WriteCapacityUnits:
+                type: number
+              CapacityUnits:
+                type: number
+          example: example_value
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The exception type
+          examples:
+          - com.amazonaws.dynamodb.v20120810#ResourceNotFoundException
+          - com.amazonaws.dynamodb.v20120810#ValidationException
+          - com.amazonaws.dynamodb.v20120810#ConditionalCheckFailedException
+          - com.amazonaws.dynamodb.v20120810#ProvisionedThroughputExceededException
+          - com.amazonaws.dynamodb.v20120810#ResourceInUseException
+          - com.amazonaws.dynamodb.v20120810#ItemCollectionSizeLimitExceededException
+          - com.amazonaws.dynamodb.v20120810#TransactionConflictException
+          - com.amazonaws.dynamodb.v20120810#TransactionCanceledException
+          - com.amazonaws.dynamodb.v20120810#InternalServerError
+        message:
+          type: string
+          description: A human-readable description of the error
+          example: example_value
+        Message:
+          type: string
+          description: A human-readable description of the error (alternative casing)
+          example: example_value
+    AttributeValue:
+      type: object
+      description: Represents the data for an attribute. Each attribute value is described as a name-value pair. The name is the data type, and the value is the data itself. DynamoDB supports scalar types (String, Number, Binary, Boolean, Null), document types (List, Map), and set types (String Set, Number Set, Binary Set).
+      properties:
+        S:
+          type: string
+          description: An attribute of type String
+          example: example_value
+        N:
+          type: string
+          description: An attribute of type Number (sent as a string to preserve precision)
+          example: example_value
+        B:
+          type: string
+          format: byte
+          description: An attribute of type Binary (Base64-encoded)
+          example: example_value
+        SS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type String Set
+          example: []
+        NS:
+          type: array
+          items:
+            type: string
+          description: An attribute of type Number Set
+          example: []
+        BS:
+          type: array
+          items:
+            type: string
+            format: byte
+          description: An attribute of type Binary Set
+          example: []
+        M:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type Map
+          example: example_value
+        L:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttributeValue'
+          description: An attribute of type List
+          example: []
+        'NULL':
+          type: boolean
+          description: An attribute of type Null
+          example: true
+        BOOL:
+          type: boolean
+          description: An attribute of type Boolean
+          example: true
+    BatchWriteItemOutput:
+      type: object
+      properties:
+        UnprocessedItems:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                PutRequest:
+                  type: object
+                  properties:
+                    Item:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/AttributeValue'
+                DeleteRequest:
+                  type: object
+                  properties:
+                    Key:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/AttributeValue'
+          description: A map of unprocessed items to retry
+          example: example_value
+        ItemCollectionMetrics:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/ItemCollectionMetrics'
+          example: example_value
+        ConsumedCapacity:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumedCapacity'
+          example: []
+    BatchWriteItemInput:
+      type: object
+      required:
+      - RequestItems
+      properties:
+        RequestItems:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: object
+              properties:
+                PutRequest:
+                  type: object
+                  required:
+                  - Item
+                  properties:
+                    Item:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/AttributeValue'
+                DeleteRequest:
+                  type: object
+                  required:
+                  - Key
+                  properties:
+                    Key:
+                      type: object
+                      additionalProperties:
+                        $ref: '#/components/schemas/AttributeValue'
+            minItems: 1
+            maxItems: 25
+          description: A map of one or more table names and, for each table, a list of operations to perform (PutRequest or DeleteRequest)
+          example: example_value
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+        ReturnItemCollectionMetrics:
+          type: string
+          enum:
+          - SIZE
+          - NONE
+          example: SIZE
+    BatchGetItemInput:
+      type: object
+      required:
+      - RequestItems
+      properties:
+        RequestItems:
+          type: object
+          additionalProperties:
+            type: object
+            required:
+            - Keys
+            properties:
+              Keys:
+                type: array
+                items:
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/AttributeValue'
+                minItems: 1
+                maxItems: 100
+              ProjectionExpression:
+                type: string
+              ExpressionAttributeNames:
+                type: object
+                additionalProperties:
+                  type: string
+              ConsistentRead:
+                type: boolean
+          description: A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table
+          example: example_value
+        ReturnConsumedCapacity:
+          type: string
+          enum:
+          - INDEXES
+          - TOTAL
+          - NONE
+          example: INDEXES
+    ItemCollectionMetrics:
+      type: object
+      properties:
+        ItemCollectionKey:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/AttributeValue'
+          description: The partition key value of the item collection
+          example: example_value
+        SizeEstimateRangeGB:
+          type: array
+          items:
+            type: number
+          description: An estimate of item collection size in gigabytes
+          example: []
+  securitySchemes:
+    aws_sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. All DynamoDB requests must be signed using the AWS SigV4 signing process. The service name for signing is 'dynamodb'.
+externalDocs:
+  description: Amazon DynamoDB API Reference
+  url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
