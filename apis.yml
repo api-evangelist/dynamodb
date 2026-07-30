@@ -1,5 +1,18 @@
 name: Amazon DynamoDB
 description: A fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 tags:
   - AWS
@@ -15,89 +28,573 @@ modified: '2026-05-19'
 url: https://aws.amazon.com/dynamodb/
 specificationVersion: '0.18'
 apis:
-  - name: Amazon DynamoDB API
-    description: RESTful API for interacting with DynamoDB tables and items.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/dynamodb/
-    baseURL: https://dynamodb.{region}.amazonaws.com
-    tags:
-      - Database
-      - Items
-      - Managed Service
-      - NoSQL
-      - Queries
-      - Tables
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/dynamodb/
-      - type: OpenAPI
-        url: openapi/dynamodb-openapi.yml
-      - type: APIReference
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
-      - type: GettingStarted
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
-      - type: SDKs
-        url: https://aws.amazon.com/tools/
-      - type: Pricing
-        url: https://aws.amazon.com/dynamodb/pricing/
-      - type: Console
-        url: https://console.aws.amazon.com/dynamodb/
-      - type: BestPractices
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
-      - type: FAQ
-        url: https://aws.amazon.com/dynamodb/faqs/
-      - type: StatusPage
-        url: https://status.aws.amazon.com/
-      - type: Security
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
-      - type: Features
-        url: https://aws.amazon.com/dynamodb/features/
-      - type: JSONSchema
-        url: json-schema/dynamodb-item-schema.json
-      - type: JSONLD
-        url: json-ld/dynamodb-context.jsonld
-    contact:
-      - type: Support
-        url: https://aws.amazon.com/premiumsupport/
-  - name: Amazon DynamoDB Streams API
-    description: >-
-      API for capturing and processing change data from DynamoDB tables in near real-time, providing time-ordered
-      sequences of item-level modifications.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
-    baseURL: https://streams.dynamodb.{region}.amazonaws.com
-    tags:
-      - Change Data Capture
-      - Event-Driven
-      - Real-Time
-      - Streams
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
-      - type: AsyncAPI
-        url: asyncapi/dynamodb-streams-asyncapi.yml
-      - type: APIReference
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.html
-  - name: Amazon DynamoDB Accelerator (DAX) API
-    description: >-
-      API for managing DynamoDB Accelerator (DAX) clusters, an in-memory caching service that delivers microsecond
-      response times for DynamoDB read workloads.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/dynamodbaccelerator/
-    baseURL: https://dax.{region}.amazonaws.com
-    tags:
-      - Accelerator
-      - Caching
-      - In-Memory
-      - Performance
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
-      - type: OpenAPI
-        url: https://api.apis.guru/v2/specs/amazonaws.com/dax/2017-04-19/openapi.yaml
-      - type: APIReference
-        url: >-
-          https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- name: Amazon DynamoDB Streams API
+  description: >-
+    API for capturing and processing change data from DynamoDB tables in near real-time, providing time-ordered
+    sequences of item-level modifications.
+  image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+  humanURL: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+  baseURL: https://streams.dynamodb.{region}.amazonaws.com
+  tags:
+  - Change Data Capture
+  - Event-Driven
+  - Real-Time
+  - Streams
+  properties:
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html
+  - type: AsyncAPI
+    url: asyncapi/dynamodb-streams-asyncapi.yml
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB_Streams.html
+- aid: dynamodb:dynamodb-backups-api
+  name: Amazon DynamoDB Backups API
+  description: Operations for creating, describing, listing, and deleting on-demand backups
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Backups
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-backups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-batch-operations-api
+  name: Amazon DynamoDB Batch Operations API
+  description: Operations for reading and writing multiple items in batch
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Batch Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-batch-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-exports-api
+  name: Amazon DynamoDB Exports API
+  description: Operations for exporting table data to Amazon S3
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Exports
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-exports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-imports-api
+  name: Amazon DynamoDB Imports API
+  description: Operations for importing data from Amazon S3 into DynamoDB tables
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Imports
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-imports-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-items-api
+  name: Amazon DynamoDB Items API
+  description: Operations for reading and writing individual items in DynamoDB tables
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-items-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-listtagsofresource-api
+  name: 'Amazon DynamoDB #ListTagsOfResource API'
+  description: >-
+    The #ListTagsOfResource API from Amazon DynamoDB — 1 operation(s) for #listtagsofresource.
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - '#ListTagsOfResource'
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-listtagsofresource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-partiql-api
+  name: Amazon DynamoDB PartiQL API
+  description: Execute SQL-compatible PartiQL statements against DynamoDB tables
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - PartiQL
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-partiql-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-queries-api
+  name: Amazon DynamoDB Queries API
+  description: Operations for querying and scanning items in DynamoDB tables
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-queries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-tables-api
+  name: Amazon DynamoDB Tables API
+  description: Operations for creating, describing, updating, listing, and deleting DynamoDB tables
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Tables
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-tables-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-tagresource-api
+  name: 'Amazon DynamoDB #TagResource API'
+  description: 'The #TagResource API from Amazon DynamoDB — 1 operation(s) for #tagresource.'
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - '#TagResource'
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-tagresource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-transactions-api
+  name: Amazon DynamoDB Transactions API
+  description: Transactional read and write operations across multiple items and tables
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-ttl-api
+  name: Amazon DynamoDB TTL API
+  description: Time to Live configuration for automatic item expiration
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - TTL
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-ttl-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
+- aid: dynamodb:dynamodb-untagresource-api
+  name: 'Amazon DynamoDB #UntagResource API'
+  description: 'The #UntagResource API from Amazon DynamoDB — 1 operation(s) for #untagresource.'
+  humanURL: https://aws.amazon.com/dynamodb/
+  baseURL: https://dynamodb.{region}.amazonaws.com
+  tags:
+  - '#UntagResource'
+  properties:
+  - type: OpenAPI
+    url: openapi/dynamodb-untagresource-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dynamodb/
+  - type: APIReference
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GettingStartedDynamoDB.html
+  - type: SDKs
+    url: https://aws.amazon.com/tools/
+  - type: Pricing
+    url: https://aws.amazon.com/dynamodb/pricing/
+  - type: Console
+    url: https://console.aws.amazon.com/dynamodb/
+  - type: BestPractices
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/best-practices.html
+  - type: FAQ
+    url: https://aws.amazon.com/dynamodb/faqs/
+  - type: StatusPage
+    url: https://status.aws.amazon.com/
+  - type: Security
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/security.html
+  - type: Features
+    url: https://aws.amazon.com/dynamodb/features/
+  - type: JSONSchema
+    url: json-schema/dynamodb-item-schema.json
+  - type: JSONLD
+    url: json-ld/dynamodb-context.jsonld
+  - type: Documentation
+    url: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html
+  - type: APIReference
+    url: >-
+      https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
 common:
   - type: AgenticAccess
     url: agentic-access/dynamodb-agentic-access.yml
