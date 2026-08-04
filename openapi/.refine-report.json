@@ -1,0 +1,38 @@
+{
+  "provider": "dynamodb",
+  "sources": [
+    "dynamodb-backups-api-openapi.yml",
+    "dynamodb-batch-operations-api-openapi.yml",
+    "dynamodb-exports-api-openapi.yml",
+    "dynamodb-imports-api-openapi.yml",
+    "dynamodb-items-api-openapi.yml",
+    "dynamodb-listtagsofresource-api-openapi.yml",
+    "dynamodb-partiql-api-openapi.yml",
+    "dynamodb-queries-api-openapi.yml",
+    "dynamodb-tables-api-openapi.yml",
+    "dynamodb-tagresource-api-openapi.yml",
+    "dynamodb-transactions-api-openapi.yml",
+    "dynamodb-ttl-api-openapi.yml",
+    "dynamodb-untagresource-api-openapi.yml"
+  ],
+  "outputs": [
+    "dynamodb-backups-api-openapi.yml",
+    "dynamodb-batch-operations-api-openapi.yml",
+    "dynamodb-exports-api-openapi.yml",
+    "dynamodb-imports-api-openapi.yml",
+    "dynamodb-items-api-openapi.yml",
+    "dynamodb-listtagsofresource-api-openapi.yml",
+    "dynamodb-partiql-api-openapi.yml",
+    "dynamodb-queries-api-openapi.yml",
+    "dynamodb-tables-api-openapi.yml",
+    "dynamodb-tagresource-api-openapi.yml",
+    "dynamodb-transactions-api-openapi.yml",
+    "dynamodb-ttl-api-openapi.yml",
+    "dynamodb-untagresource-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
