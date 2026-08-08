@@ -5,10 +5,10 @@
       "source": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/",
       "feed_url": "https://aws.amazon.com/blogs/database/category/database/amazon-dynamodb/feed/",
       "title": "AWS Database Blog - Amazon DynamoDB",
-      "saved": 0,
+      "saved": 1,
       "method": "feed"
     }
   ],
-  "post_count": 34,
-  "fetched": "2026-08-01T15:38:58Z"
+  "post_count": 35,
+  "fetched": "2026-08-06T13:56:59Z"
 }
