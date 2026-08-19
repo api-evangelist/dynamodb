@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon DynamoDB Backups PartiQL API",
+    "version": "2012-08-10"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PartiQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Dynamodb Execute a Partiql Statement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#ExecuteStatement",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a single PartiQL statement against a DynamoDB table. You can run SQL-compatible queries against your DynamoDB data. PartiQL supports SELECT, INSERT, UPDATE, and DELETE statements."
+        },
+        {
+          "info": {
+            "name": "Amazon Dynamodb Execute Multiple Partiql Statements in a Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#BatchExecuteStatement",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes multiple PartiQL statements in a batch. Each statement in the batch runs independently and does not participate in a transaction. A batch can contain up to 25 statements."
+        },
+        {
+          "info": {
+            "name": "Amazon Dynamodb Execute Partiql Statements in a Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#ExecuteTransaction",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes one or more PartiQL statements in a transaction. The entire transaction must consist of either read statements or write statements; you cannot mix both in one transaction. A transaction can contain up to 100 PartiQL statements."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

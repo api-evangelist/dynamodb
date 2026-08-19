@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon DynamoDB Backups Batch Operations API",
+    "version": "2012-08-10"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Dynamodb Get Multiple Items From One or More Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#BatchGetItem",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items."
+        },
+        {
+          "info": {
+            "name": "Amazon Dynamodb Put or Delete Multiple Items in One or More Tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#BatchWriteItem",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Puts or deletes multiple items in one or more tables. A single call to BatchWriteItem can transmit up to 16 MB of data over the network, consisting of up to 25 put or delete requests. Individual items to be written can be as large as 400 KB."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

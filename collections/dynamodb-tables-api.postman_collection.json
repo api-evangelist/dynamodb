@@ -1,0 +1,1417 @@
+{
+  "item": [
+    {
+      "id": "0bec356a-14b4-4d72-a906-e5fc50c963b4",
+      "name": "Tables",
+      "description": {
+        "content": "Operations for creating, describing, updating, listing, and deleting DynamoDB tables",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4dd2ee0f-4e6c-405a-b7bb-f420e1ede892",
+          "name": "Amazon Dynamodb Create a Dynamodb Table",
+          "request": {
+            "name": "Amazon Dynamodb Create a Dynamodb Table",
+            "description": {
+              "content": "Creates a new table in DynamoDB. The CreateTable operation adds a new table to your account. Table names must be unique within each Region. The table is created with the specified key schema, attribute definitions, provisioned throughput settings, and optional secondary indexes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TableName\": \"<string>\",\n  \"KeySchema\": [\n    {\n      \"AttributeName\": \"<string>\",\n      \"KeyType\": \"<string>\"\n    }\n  ],\n  \"AttributeDefinitions\": [\n    {\n      \"AttributeName\": \"<string>\",\n      \"AttributeType\": \"<string>\"\n    },\n    {\n      \"AttributeName\": \"<string>\",\n      \"AttributeType\": \"<string>\"\n    }\n  ],\n  \"BillingMode\": \"<string>\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": \"<integer>\",\n    \"WriteCapacityUnits\": \"<integer>\"\n  },\n  \"GlobalSecondaryIndexes\": [\n    {\n      \"IndexName\": \"<string>\",\n      \"KeySchema\": [\n        {\n          \"AttributeName\": \"<string>\",\n          \"KeyType\": \"<string>\"\n        }\n      ],\n      \"Projection\": {\n        \"ProjectionType\": \"<string>\",\n        \"NonKeyAttributes\": [\n          \"<string>\"\n        ]\n      },\n      \"ProvisionedThroughput\": {\n        \"ReadCapacityUnits\": \"<integer>\",\n        \"WriteCapacityUnits\": \"<integer>\"\n      }\n    },\n    {\n      \"IndexName\": \"<string>\",\n      \"KeySchema\": [\n        {\n          \"AttributeName\": \"<string>\",\n          \"KeyType\": \"<string>\"\n        }\n      ],\n      \"Projection\": {\n        \"ProjectionType\": \"<string>\",\n        \"NonKeyAttributes\": [\n          \"<string>\"\n        ]\n      },\n      \"ProvisionedThroughput\": {\n        \"ReadCapacityUnits\": \"<integer>\",\n        \"WriteCapacityUnits\": \"<integer>\"\n      }\n    }\n  ],\n  \"LocalSecondaryIndexes\": [\n    {\n      \"IndexName\": \"<string>\",\n      \"KeySchema\": [\n        {\n          \"AttributeName\": \"<string>\",\n          \"KeyType\": \"<string>\"\n        },\n        {\n          \"AttributeName\": \"<string>\",\n          \"KeyType\": \"<string>\"\n        }\n      ],\n      \"Projection\": {\n        \"ProjectionType\": \"<string>\",\n        \"NonKeyAttributes\": [\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"IndexName\": \"<string>\",\n      \"KeySchema\": [\n        {\n          \"AttributeName\": \"<string>\",\n          \"KeyType\": \"<string>\"\n        },\n        {\n          \"AttributeName\": \"<string>\",\n          \"KeyType\": \"<string>\"\n        }\n      ],\n      \"Projection\": {\n        \"ProjectionType\": \"<string>\",\n        \"NonKeyAttributes\": [\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"StreamSpecification\": {\n    \"StreamEnabled\": \"<boolean>\",\n    \"StreamViewType\": \"<string>\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": \"<boolean>\",\n    \"SSEType\": \"<string>\",\n    \"KMSMasterKeyId\": \"<string>\"\n  },\n  \"Tags\": [\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"Key\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ],\n  \"TableClass\": \"<string>\",\n  \"DeletionProtectionEnabled\": \"<boolean>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "b13c62e4-2fbc-4c02-9ad4-121d8f7e6679",
+              "name": "Table creation initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"KeySchema\": [],\n  \"AttributeDefinitions\": [],\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34cd4849-1f7a-4501-8f6d-aafe0adac3b6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"KeySchema\": [],\n  \"AttributeDefinitions\": [],\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "92e63ff2-1068-42d9-8ad3-9d973b1855cc",
+              "name": "Resource already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"KeySchema\": [],\n  \"AttributeDefinitions\": [],\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "00ca9f7b-f17b-4789-8304-240528c6bdbe",
+              "name": "Too many requests - provisioned throughput exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"KeySchema\": [],\n  \"AttributeDefinitions\": [],\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb8161b8-f13b-4d13-bbcb-31a1431cc536",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"KeySchema\": [],\n  \"AttributeDefinitions\": [],\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05b1996e-feff-48d4-a046-fd89e1575583",
+          "name": "Amazon Dynamodb Describe a Dynamodb Table",
+          "request": {
+            "name": "Amazon Dynamodb Describe a Dynamodb Table",
+            "description": {
+              "content": "Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "DescribeTable",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TableName\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "ccdcfbda-f980-47f1-a759-4920d698b4e2",
+              "name": "Table description returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DescribeTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cdc82c7b-c081-4946-a772-b241bdc37797",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DescribeTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "38851f2d-2ab3-4b1a-984c-1984f8d7ff6e",
+              "name": "Table not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DescribeTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97f746ee-38e7-479a-9d75-35f9326cf050",
+          "name": "Amazon Dynamodb Update a Dynamodb Table",
+          "request": {
+            "name": "Amazon Dynamodb Update a Dynamodb Table",
+            "description": {
+              "content": "Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table. You can only perform one of the following operations at once: modify provisioned throughput, enable/disable Streams, remove a global secondary index, or create a new global secondary index.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "UpdateTable",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TableName\": \"<string>\",\n  \"AttributeDefinitions\": [\n    {\n      \"AttributeName\": \"<string>\",\n      \"AttributeType\": \"<string>\"\n    },\n    {\n      \"AttributeName\": \"<string>\",\n      \"AttributeType\": \"<string>\"\n    }\n  ],\n  \"BillingMode\": \"<string>\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": \"<integer>\",\n    \"WriteCapacityUnits\": \"<integer>\"\n  },\n  \"GlobalSecondaryIndexUpdates\": [\n    {\n      \"Update\": {\n        \"IndexName\": \"<string>\",\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": \"<integer>\",\n          \"WriteCapacityUnits\": \"<integer>\"\n        }\n      },\n      \"Create\": {\n        \"IndexName\": \"<string>\",\n        \"KeySchema\": [\n          {\n            \"AttributeName\": \"<string>\",\n            \"KeyType\": \"<string>\"\n          }\n        ],\n        \"Projection\": {\n          \"ProjectionType\": \"<string>\",\n          \"NonKeyAttributes\": [\n            \"<string>\"\n          ]\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": \"<integer>\",\n          \"WriteCapacityUnits\": \"<integer>\"\n        }\n      },\n      \"Delete\": {\n        \"IndexName\": \"<string>\"\n      }\n    },\n    {\n      \"Update\": {\n        \"IndexName\": \"<string>\",\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": \"<integer>\",\n          \"WriteCapacityUnits\": \"<integer>\"\n        }\n      },\n      \"Create\": {\n        \"IndexName\": \"<string>\",\n        \"KeySchema\": [\n          {\n            \"AttributeName\": \"<string>\",\n            \"KeyType\": \"<string>\"\n          }\n        ],\n        \"Projection\": {\n          \"ProjectionType\": \"<string>\",\n          \"NonKeyAttributes\": [\n            \"<string>\"\n          ]\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": \"<integer>\",\n          \"WriteCapacityUnits\": \"<integer>\"\n        }\n      },\n      \"Delete\": {\n        \"IndexName\": \"<string>\"\n      }\n    }\n  ],\n  \"StreamSpecification\": {\n    \"StreamEnabled\": \"<boolean>\",\n    \"StreamViewType\": \"<string>\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": \"<boolean>\",\n    \"SSEType\": \"<string>\",\n    \"KMSMasterKeyId\": \"<string>\"\n  },\n  \"TableClass\": \"<string>\",\n  \"DeletionProtectionEnabled\": \"<boolean>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "fc2f749a-3bc3-4b6f-971c-bbcf2e755b19",
+              "name": "Table update initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "UpdateTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d10712e-feaf-44ea-b4d4-cd856a676d9a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "UpdateTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "57934f58-c3a3-466e-b7a4-785912e9de61",
+              "name": "Table not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "UpdateTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7e05657a-f83d-46e8-b4ac-4577680edf7d",
+              "name": "Limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "UpdateTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\",\n  \"BillingMode\": \"PROVISIONED\",\n  \"ProvisionedThroughput\": {\n    \"ReadCapacityUnits\": 10,\n    \"WriteCapacityUnits\": 10\n  },\n  \"StreamSpecification\": {\n    \"StreamEnabled\": true,\n    \"StreamViewType\": \"NEW_IMAGE\"\n  },\n  \"SSESpecification\": {\n    \"Enabled\": true,\n    \"SSEType\": \"AES256\",\n    \"KMSMasterKeyId\": \"500123\"\n  },\n  \"TableClass\": \"STANDARD\",\n  \"DeletionProtectionEnabled\": true\n}"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "876f3a07-4dc9-4ea5-8e16-0dc19f36e274",
+          "name": "Amazon Dynamodb Delete a Dynamodb Table",
+          "request": {
+            "name": "Amazon Dynamodb Delete a Dynamodb Table",
+            "description": {
+              "content": "Deletes a table and all of its items. After a DeleteTable request, the specified table is in the DELETING state until DynamoDB completes the deletion. Any items in the table are deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "DeleteTable",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TableName\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "8ad214f8-059b-458f-9d4a-d35f5a0af75b",
+              "name": "Table deletion initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DeleteTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6236f785-b94d-473b-ac6a-8660e2c4a604",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DeleteTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50a4dd15-9115-4751-b059-e305e2649eec",
+              "name": "Table not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "DeleteTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TableName\": \"example_value\"\n}"
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40a88932-01c4-444b-b9df-5d54d5a80ac0",
+          "name": "Amazon Dynamodb List Dynamodb Tables",
+          "request": {
+            "name": "Amazon Dynamodb List Dynamodb Tables",
+            "description": {
+              "content": "Returns an array of table names associated with the current account and endpoint. The output from ListTables is paginated, with each page returning a maximum number of 100 table names.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "ListTables",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ExclusiveStartTableName\": \"<string>\",\n  \"Limit\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "c8f7aac2-6535-458d-8e02-08a7459bfa56",
+              "name": "List of tables returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ListTables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ExclusiveStartTableName\": \"example_value\",\n  \"Limit\": 10\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a50db217-1d62-4ca0-bb38-dc0a8ae5d3ed",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ListTables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ExclusiveStartTableName\": \"example_value\",\n  \"Limit\": 10\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82e96110-0461-4c8f-bbef-8d154a746a25",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ListTables",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ExclusiveStartTableName\": \"example_value\",\n  \"Limit\": 10\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://dynamodb.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c3d2b31a-86fb-4cdc-a7f0-79db843b203b",
+    "name": "Amazon DynamoDB Backups Tables API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

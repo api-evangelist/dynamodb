@@ -1,0 +1,709 @@
+{
+  "item": [
+    {
+      "id": "d2ca5019-1bd7-45f2-a0cb-fde8d8244b3e",
+      "name": "Transactions",
+      "description": {
+        "content": "Transactional read and write operations across multiple items and tables",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6e07f0d-0624-4be6-be99-0c66566a518e",
+          "name": "Amazon Dynamodb Get Items in a Transaction",
+          "request": {
+            "name": "Amazon Dynamodb Get Items in a Transaction",
+            "description": {
+              "content": "A synchronous operation that atomically retrieves multiple items from one or more tables (but not from indexes) in a single account and Region. A TransactGetItems call can contain up to 100 TransactGetItem objects, each of which contains a Get structure.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "TransactGetItems",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TransactItems\": [\n    {\n      \"Get\": {\n        \"TableName\": \"<string>\",\n        \"Key\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        },\n        \"ProjectionExpression\": \"<string>\",\n        \"ExpressionAttributeNames\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"ReturnConsumedCapacity\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "8bb70e7e-417a-4817-86b4-14a9b2b4f613",
+              "name": "Transactional get executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "TransactGetItems",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactItems\": [],\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "efb0c76c-8b0a-4d45-98e5-96ff2f57b770",
+              "name": "Bad request or transaction cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "TransactGetItems",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactItems\": [],\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b5dd0009-b845-46a5-b5ee-79c0a7dad6ca",
+              "name": "Provisioned throughput exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "TransactGetItems",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactItems\": [],\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb29f90d-40be-413c-b067-fddaa1214d39",
+          "name": "Amazon Dynamodb Write Items in a Transaction",
+          "request": {
+            "name": "Amazon Dynamodb Write Items in a Transaction",
+            "description": {
+              "content": "A synchronous write operation that groups up to 100 action requests. These actions can target items in different tables, but not in different accounts or Regions. The actions are completed atomically so that either all of them succeed, or all of them fail. TransactWriteItems supports Put, Update, Delete, and ConditionCheck actions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "TransactWriteItems",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TransactItems\": [\n    {\n      \"ConditionCheck\": {\n        \"TableName\": \"<string>\",\n        \"Key\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_1\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        },\n        \"ConditionExpression\": \"<string>\",\n        \"ExpressionAttributeNames\": {\n          \"key_0\": \"<string>\"\n        },\n        \"ExpressionAttributeValues\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_1\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_2\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_3\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        }\n      },\n      \"Put\": {\n        \"TableName\": \"<string>\",\n        \"Item\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_1\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        },\n        \"ConditionExpression\": \"<string>\",\n        \"ExpressionAttributeNames\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\",\n          \"key_4\": \"<string>\"\n        },\n        \"ExpressionAttributeValues\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        }\n      },\n      \"Delete\": {\n        \"TableName\": \"<string>\",\n        \"Key\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        },\n        \"ConditionExpression\": \"<string>\",\n        \"ExpressionAttributeNames\": {\n          \"key_0\": \"<string>\"\n        },\n        \"ExpressionAttributeValues\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_1\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        }\n      },\n      \"Update\": {\n        \"TableName\": \"<string>\",\n        \"Key\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_1\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        },\n        \"UpdateExpression\": \"<string>\",\n        \"ConditionExpression\": \"<string>\",\n        \"ExpressionAttributeNames\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"ExpressionAttributeValues\": {\n          \"key_0\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_1\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_2\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          },\n          \"key_3\": {\n            \"S\": \"<string>\",\n            \"N\": \"<string>\",\n            \"B\": \"<byte>\",\n            \"SS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"NS\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"BS\": [\n              \"<byte>\",\n              \"<byte>\"\n            ],\n            \"M\": {\n              \"key_0\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            },\n            \"L\": [\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              },\n              {\n                \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n              }\n            ],\n            \"NULL\": \"<boolean>\",\n            \"BOOL\": \"<boolean>\"\n          }\n        }\n      }\n    }\n  ],\n  \"ClientRequestToken\": \"<string>\",\n  \"ReturnConsumedCapacity\": \"<string>\",\n  \"ReturnItemCollectionMetrics\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "8c5df85d-6cf4-4643-8cc0-5be588ee16af",
+              "name": "Transactional write executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "TransactWriteItems",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactItems\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\",\n  \"ReturnItemCollectionMetrics\": \"SIZE\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "735e5f04-f4b0-476c-8d44-f4b95ca6d5ba",
+              "name": "Bad request or transaction cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "TransactWriteItems",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactItems\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\",\n  \"ReturnItemCollectionMetrics\": \"SIZE\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6aee4f3d-ad25-4367-9fb5-3a67fd4dfb4c",
+              "name": "Provisioned throughput exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "TransactWriteItems",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactItems\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\",\n  \"ReturnItemCollectionMetrics\": \"SIZE\"\n}"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "69fd09d0-4dc7-4c5a-babf-2b7aa6ac2cfc",
+          "name": "Amazon Dynamodb Execute Partiql Statements in a Transaction",
+          "request": {
+            "name": "Amazon Dynamodb Execute Partiql Statements in a Transaction",
+            "description": {
+              "content": "Executes one or more PartiQL statements in a transaction. The entire transaction must consist of either read statements or write statements; you cannot mix both in one transaction. A transaction can contain up to 100 PartiQL statements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "ExecuteTransaction",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TransactStatements\": [\n    {\n      \"Statement\": \"<string>\",\n      \"Parameters\": [\n        {\n          \"S\": \"<string>\",\n          \"N\": \"<string>\",\n          \"B\": \"<byte>\",\n          \"SS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"NS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"BS\": [\n            \"<byte>\",\n            \"<byte>\"\n          ],\n          \"M\": {\n            \"key_0\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_3\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          },\n          \"L\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          ],\n          \"NULL\": \"<boolean>\",\n          \"BOOL\": \"<boolean>\"\n        },\n        {\n          \"S\": \"<string>\",\n          \"N\": \"<string>\",\n          \"B\": \"<byte>\",\n          \"SS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"NS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"BS\": [\n            \"<byte>\",\n            \"<byte>\"\n          ],\n          \"M\": {\n            \"key_0\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          },\n          \"L\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          ],\n          \"NULL\": \"<boolean>\",\n          \"BOOL\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"ClientRequestToken\": \"<string>\",\n  \"ReturnConsumedCapacity\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "d8b378ae-3f12-4741-a0df-f7d443b2bfb5",
+              "name": "Transaction executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteTransaction",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactStatements\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "34c0b50c-156c-427e-a05d-e2878ce8c153",
+              "name": "Bad request or transaction cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteTransaction",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactStatements\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://dynamodb.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c663d8df-49c5-4471-bb04-528b51da4dcf",
+    "name": "Amazon DynamoDB Backups Transactions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,295 @@
+{
+  "item": [
+    {
+      "id": "f0386963-6249-4e56-82a9-5dbbf94debe2",
+      "name": "Imports",
+      "description": {
+        "content": "Operations for importing data from Amazon S3 into DynamoDB tables",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9cc7fa2d-1617-479f-939e-e2a814a219e0",
+          "name": "Amazon Dynamodb Import Data From S3 Into a Dynamodb Table",
+          "request": {
+            "name": "Amazon Dynamodb Import Data From S3 Into a Dynamodb Table",
+            "description": {
+              "content": "Imports table data from an S3 bucket. The source data can be in DynamoDB JSON format, Amazon Ion format, or CSV format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "ImportTable",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"S3BucketSource\": {\n    \"S3Bucket\": \"<string>\",\n    \"S3BucketOwner\": \"<string>\",\n    \"S3KeyPrefix\": \"<string>\"\n  },\n  \"InputFormat\": \"<string>\",\n  \"TableCreationParameters\": {\n    \"TableName\": \"<string>\",\n    \"AttributeDefinitions\": [\n      {\n        \"AttributeName\": \"<string>\",\n        \"AttributeType\": \"<string>\"\n      },\n      {\n        \"AttributeName\": \"<string>\",\n        \"AttributeType\": \"<string>\"\n      }\n    ],\n    \"KeySchema\": [\n      {\n        \"AttributeName\": \"<string>\",\n        \"KeyType\": \"<string>\"\n      },\n      {\n        \"AttributeName\": \"<string>\",\n        \"KeyType\": \"<string>\"\n      }\n    ],\n    \"BillingMode\": \"<string>\",\n    \"ProvisionedThroughput\": {\n      \"ReadCapacityUnits\": \"<integer>\",\n      \"WriteCapacityUnits\": \"<integer>\"\n    },\n    \"SSESpecification\": {\n      \"Enabled\": \"<boolean>\",\n      \"SSEType\": \"<string>\",\n      \"KMSMasterKeyId\": \"<string>\"\n    },\n    \"GlobalSecondaryIndexes\": [\n      {\n        \"IndexName\": \"<string>\",\n        \"KeySchema\": [\n          {\n            \"AttributeName\": \"<string>\",\n            \"KeyType\": \"<string>\"\n          }\n        ],\n        \"Projection\": {\n          \"ProjectionType\": \"<string>\",\n          \"NonKeyAttributes\": [\n            \"<string>\"\n          ]\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": \"<integer>\",\n          \"WriteCapacityUnits\": \"<integer>\"\n        }\n      },\n      {\n        \"IndexName\": \"<string>\",\n        \"KeySchema\": [\n          {\n            \"AttributeName\": \"<string>\",\n            \"KeyType\": \"<string>\"\n          }\n        ],\n        \"Projection\": {\n          \"ProjectionType\": \"<string>\",\n          \"NonKeyAttributes\": [\n            \"<string>\"\n          ]\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": \"<integer>\",\n          \"WriteCapacityUnits\": \"<integer>\"\n        }\n      }\n    ]\n  },\n  \"ClientToken\": \"<string>\",\n  \"InputFormatOptions\": {\n    \"Csv\": {\n      \"Delimiter\": \"<string>\",\n      \"HeaderList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"InputCompressionType\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "cfd950e9-6776-436e-aebe-fa83318ea285",
+              "name": "Import initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ImportTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"S3BucketSource\": {\n    \"S3Bucket\": \"<string>\",\n    \"S3BucketOwner\": \"<string>\",\n    \"S3KeyPrefix\": \"<string>\"\n  },\n  \"InputFormat\": \"DYNAMODB_JSON\",\n  \"TableCreationParameters\": {\n    \"TableName\": \"<string>\",\n    \"AttributeDefinitions\": [\n      {\n        \"AttributeName\": \"example_value\",\n        \"AttributeType\": \"S\"\n      },\n      {\n        \"AttributeName\": \"example_value\",\n        \"AttributeType\": \"S\"\n      }\n    ],\n    \"KeySchema\": [\n      {\n        \"AttributeName\": \"example_value\",\n        \"KeyType\": \"HASH\"\n      },\n      {\n        \"AttributeName\": \"example_value\",\n        \"KeyType\": \"HASH\"\n      }\n    ],\n    \"BillingMode\": \"<string>\",\n    \"ProvisionedThroughput\": {\n      \"ReadCapacityUnits\": 10,\n      \"WriteCapacityUnits\": 10\n    },\n    \"SSESpecification\": {\n      \"Enabled\": true,\n      \"SSEType\": \"AES256\",\n      \"KMSMasterKeyId\": \"500123\"\n    },\n    \"GlobalSecondaryIndexes\": [\n      {\n        \"IndexName\": \"example_value\",\n        \"KeySchema\": [],\n        \"Projection\": {\n          \"ProjectionType\": \"ALL\"\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": 10,\n          \"WriteCapacityUnits\": 10\n        }\n      },\n      {\n        \"IndexName\": \"example_value\",\n        \"KeySchema\": [],\n        \"Projection\": {\n          \"ProjectionType\": \"ALL\"\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": 10,\n          \"WriteCapacityUnits\": 10\n        }\n      }\n    ]\n  },\n  \"ClientToken\": \"example_value\",\n  \"InputFormatOptions\": {\n    \"Csv\": {\n      \"Delimiter\": \"<string>\",\n      \"HeaderList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"InputCompressionType\": \"GZIP\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a586cb2-65d5-40c4-bbc0-645f8b4d9e50",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ImportTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"S3BucketSource\": {\n    \"S3Bucket\": \"<string>\",\n    \"S3BucketOwner\": \"<string>\",\n    \"S3KeyPrefix\": \"<string>\"\n  },\n  \"InputFormat\": \"DYNAMODB_JSON\",\n  \"TableCreationParameters\": {\n    \"TableName\": \"<string>\",\n    \"AttributeDefinitions\": [\n      {\n        \"AttributeName\": \"example_value\",\n        \"AttributeType\": \"S\"\n      },\n      {\n        \"AttributeName\": \"example_value\",\n        \"AttributeType\": \"S\"\n      }\n    ],\n    \"KeySchema\": [\n      {\n        \"AttributeName\": \"example_value\",\n        \"KeyType\": \"HASH\"\n      },\n      {\n        \"AttributeName\": \"example_value\",\n        \"KeyType\": \"HASH\"\n      }\n    ],\n    \"BillingMode\": \"<string>\",\n    \"ProvisionedThroughput\": {\n      \"ReadCapacityUnits\": 10,\n      \"WriteCapacityUnits\": 10\n    },\n    \"SSESpecification\": {\n      \"Enabled\": true,\n      \"SSEType\": \"AES256\",\n      \"KMSMasterKeyId\": \"500123\"\n    },\n    \"GlobalSecondaryIndexes\": [\n      {\n        \"IndexName\": \"example_value\",\n        \"KeySchema\": [],\n        \"Projection\": {\n          \"ProjectionType\": \"ALL\"\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": 10,\n          \"WriteCapacityUnits\": 10\n        }\n      },\n      {\n        \"IndexName\": \"example_value\",\n        \"KeySchema\": [],\n        \"Projection\": {\n          \"ProjectionType\": \"ALL\"\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": 10,\n          \"WriteCapacityUnits\": 10\n        }\n      }\n    ]\n  },\n  \"ClientToken\": \"example_value\",\n  \"InputFormatOptions\": {\n    \"Csv\": {\n      \"Delimiter\": \"<string>\",\n      \"HeaderList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"InputCompressionType\": \"GZIP\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "669d2218-a0c4-4ace-bda1-0f24c918cc25",
+              "name": "Limit exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ImportTable",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"S3BucketSource\": {\n    \"S3Bucket\": \"<string>\",\n    \"S3BucketOwner\": \"<string>\",\n    \"S3KeyPrefix\": \"<string>\"\n  },\n  \"InputFormat\": \"DYNAMODB_JSON\",\n  \"TableCreationParameters\": {\n    \"TableName\": \"<string>\",\n    \"AttributeDefinitions\": [\n      {\n        \"AttributeName\": \"example_value\",\n        \"AttributeType\": \"S\"\n      },\n      {\n        \"AttributeName\": \"example_value\",\n        \"AttributeType\": \"S\"\n      }\n    ],\n    \"KeySchema\": [\n      {\n        \"AttributeName\": \"example_value\",\n        \"KeyType\": \"HASH\"\n      },\n      {\n        \"AttributeName\": \"example_value\",\n        \"KeyType\": \"HASH\"\n      }\n    ],\n    \"BillingMode\": \"<string>\",\n    \"ProvisionedThroughput\": {\n      \"ReadCapacityUnits\": 10,\n      \"WriteCapacityUnits\": 10\n    },\n    \"SSESpecification\": {\n      \"Enabled\": true,\n      \"SSEType\": \"AES256\",\n      \"KMSMasterKeyId\": \"500123\"\n    },\n    \"GlobalSecondaryIndexes\": [\n      {\n        \"IndexName\": \"example_value\",\n        \"KeySchema\": [],\n        \"Projection\": {\n          \"ProjectionType\": \"ALL\"\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": 10,\n          \"WriteCapacityUnits\": 10\n        }\n      },\n      {\n        \"IndexName\": \"example_value\",\n        \"KeySchema\": [],\n        \"Projection\": {\n          \"ProjectionType\": \"ALL\"\n        },\n        \"ProvisionedThroughput\": {\n          \"ReadCapacityUnits\": 10,\n          \"WriteCapacityUnits\": 10\n        }\n      }\n    ]\n  },\n  \"ClientToken\": \"example_value\",\n  \"InputFormatOptions\": {\n    \"Csv\": {\n      \"Delimiter\": \"<string>\",\n      \"HeaderList\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  },\n  \"InputCompressionType\": \"GZIP\"\n}"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://dynamodb.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "aa0cfef4-04e3-45d5-90be-a9e915489f44",
+    "name": "Amazon DynamoDB Backups Imports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

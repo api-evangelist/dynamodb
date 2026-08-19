@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon DynamoDB Backups Queries API",
+    "version": "2012-08-10"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon Dynamodb Query Items by Primary Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#Query",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finds items based on primary key values. You can query a table, a local secondary index, or a global secondary index. You must provide a specific value for the partition key. You can optionally narrow the scope of the query using a sort key condition and filter expression. Query results are always sorted by the sort key value."
+        },
+        {
+          "info": {
+            "name": "Amazon Dynamodb Scan an Entire Table or Index",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dynamodb.{region}.amazonaws.com/#Scan",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns one or more items and item attributes by accessing every item in a table or a secondary index. Scan operations proceed sequentially. For faster performance on a large table or secondary index, you can request a parallel scan by specifying the Segment and TotalSegments parameters. A filter expression can be applied to narrow the results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

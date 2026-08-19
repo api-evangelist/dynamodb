@@ -1,0 +1,649 @@
+{
+  "item": [
+    {
+      "id": "ab6bacc9-8f28-411e-8854-e14df411afee",
+      "name": "PartiQL",
+      "description": {
+        "content": "Execute SQL-compatible PartiQL statements against DynamoDB tables",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8611aa1c-364d-417d-be3f-56f13f93a6e9",
+          "name": "Amazon Dynamodb Execute a Partiql Statement",
+          "request": {
+            "name": "Amazon Dynamodb Execute a Partiql Statement",
+            "description": {
+              "content": "Executes a single PartiQL statement against a DynamoDB table. You can run SQL-compatible queries against your DynamoDB data. PartiQL supports SELECT, INSERT, UPDATE, and DELETE statements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "ExecuteStatement",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Statement\": \"<string>\",\n  \"Parameters\": [\n    {\n      \"S\": \"<string>\",\n      \"N\": \"<string>\",\n      \"B\": \"<byte>\",\n      \"SS\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"NS\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"BS\": [\n        \"<byte>\",\n        \"<byte>\"\n      ],\n      \"M\": {\n        \"key_0\": {\n          \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n        }\n      },\n      \"L\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n        }\n      ],\n      \"NULL\": \"<boolean>\",\n      \"BOOL\": \"<boolean>\"\n    }\n  ],\n  \"ConsistentRead\": \"<boolean>\",\n  \"NextToken\": \"<string>\",\n  \"ReturnConsumedCapacity\": \"<string>\",\n  \"Limit\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "9173ecbd-3e61-4280-a5de-764a223a268c",
+              "name": "Statement executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Statement\": \"example_value\",\n  \"ConsistentRead\": true,\n  \"NextToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\",\n  \"Limit\": 10\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4ee7ea5-f10a-4d80-b391-91451eb81663",
+              "name": "Bad request or conditional check failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Statement\": \"example_value\",\n  \"ConsistentRead\": true,\n  \"NextToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\",\n  \"Limit\": 10\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aedd7938-ed7e-425b-b4b8-213848bc13f9",
+              "name": "Provisioned throughput exceeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Statement\": \"example_value\",\n  \"ConsistentRead\": true,\n  \"NextToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\",\n  \"Limit\": 10\n}"
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "590cf863-2feb-4cd3-8b18-9493933e38fd",
+          "name": "Amazon Dynamodb Execute Multiple Partiql Statements in a Batch",
+          "request": {
+            "name": "Amazon Dynamodb Execute Multiple Partiql Statements in a Batch",
+            "description": {
+              "content": "Executes multiple PartiQL statements in a batch. Each statement in the batch runs independently and does not participate in a transaction. A batch can contain up to 25 statements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "BatchExecuteStatement",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Statements\": [\n    {\n      \"Statement\": \"<string>\",\n      \"Parameters\": [\n        {\n          \"S\": \"<string>\",\n          \"N\": \"<string>\",\n          \"B\": \"<byte>\",\n          \"SS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"NS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"BS\": [\n            \"<byte>\",\n            \"<byte>\"\n          ],\n          \"M\": {\n            \"key_0\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          },\n          \"L\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          ],\n          \"NULL\": \"<boolean>\",\n          \"BOOL\": \"<boolean>\"\n        },\n        {\n          \"S\": \"<string>\",\n          \"N\": \"<string>\",\n          \"B\": \"<byte>\",\n          \"SS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"NS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"BS\": [\n            \"<byte>\",\n            \"<byte>\"\n          ],\n          \"M\": {\n            \"key_0\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          },\n          \"L\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          ],\n          \"NULL\": \"<boolean>\",\n          \"BOOL\": \"<boolean>\"\n        }\n      ],\n      \"ConsistentRead\": \"<boolean>\"\n    }\n  ],\n  \"ReturnConsumedCapacity\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "f9cacca3-6dae-44e9-82b0-ea1faf7c4bf8",
+              "name": "Batch statement executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "BatchExecuteStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Statements\": [],\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a593fd2-a361-4133-b6ee-ef693f4d5702",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "BatchExecuteStatement",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Statements\": [],\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8ee730f-4b47-4a16-bd24-7d154e7ba88a",
+          "name": "Amazon Dynamodb Execute Partiql Statements in a Transaction",
+          "request": {
+            "name": "Amazon Dynamodb Execute Partiql Statements in a Transaction",
+            "description": {
+              "content": "Executes one or more PartiQL statements in a transaction. The entire transaction must consist of either read statements or write statements; you cannot mix both in one transaction. A transaction can contain up to 100 PartiQL statements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "ExecuteTransaction",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) ",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.0"
+              },
+              {
+                "key": "Accept",
+                "value": "application/x-amz-json-1.0"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"TransactStatements\": [\n    {\n      \"Statement\": \"<string>\",\n      \"Parameters\": [\n        {\n          \"S\": \"<string>\",\n          \"N\": \"<string>\",\n          \"B\": \"<byte>\",\n          \"SS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"NS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"BS\": [\n            \"<byte>\",\n            \"<byte>\"\n          ],\n          \"M\": {\n            \"key_0\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          },\n          \"L\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          ],\n          \"NULL\": \"<boolean>\",\n          \"BOOL\": \"<boolean>\"\n        },\n        {\n          \"S\": \"<string>\",\n          \"N\": \"<string>\",\n          \"B\": \"<byte>\",\n          \"SS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"NS\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"BS\": [\n            \"<byte>\",\n            \"<byte>\"\n          ],\n          \"M\": {\n            \"key_0\": {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          },\n          \"L\": [\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            },\n            {\n              \"value\": \"<Circular reference to #/components/schemas/AttributeValue detected>\"\n            }\n          ],\n          \"NULL\": \"<boolean>\",\n          \"BOOL\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"ClientRequestToken\": \"<string>\",\n  \"ReturnConsumedCapacity\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "6bf87421-5639-4dd5-af32-5fb86e2bb79c",
+              "name": "Transaction executed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteTransaction",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactStatements\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5bd33c2-aa4b-4312-a2df-41b806cebf34",
+              "name": "Bad request or transaction cancelled",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "ExecuteTransaction",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) ",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/x-amz-json-1.0"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"TransactStatements\": [],\n  \"ClientRequestToken\": \"example_value\",\n  \"ReturnConsumedCapacity\": \"INDEXES\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/x-amz-json-1.0"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS Region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://dynamodb.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d375e65d-11b4-4b73-b5d3-a8e929789ee1",
+    "name": "Amazon DynamoDB Backups PartiQL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Amazon DynamoDB is a fully managed NoSQL database service that provides fast and predictable performance with seamless scalability. DynamoDB uses a JSON-based wire protocol with target-specific headers in an RPC style. The API exposes operations for creating and managing tables, reading and writing items, and executing queries and scans. All requests are authenticated via AWS Signature Version 4 and use the X-Amz-Target header to specify the operation.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}
