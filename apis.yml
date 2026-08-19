@@ -26,7 +26,7 @@ tags:
 created: '2024'
 modified: '2026-05-19'
 url: https://aws.amazon.com/dynamodb/
-specificationVersion: '0.18'
+specificationVersion: '0.23'
 apis:
 - name: Amazon DynamoDB Streams API
   description: >-
