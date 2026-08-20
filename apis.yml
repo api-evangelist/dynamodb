@@ -95,7 +95,8 @@ apis:
   description: Operations for reading and writing multiple items in batch
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - Batch Operations
   properties:
   - type: OpenAPI
@@ -138,6 +139,8 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
+  - Export
+  tags_raw:
   - Exports
   properties:
   - type: OpenAPI
@@ -222,6 +225,8 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
+  - Item
+  tags_raw:
   - Items
   properties:
   - type: OpenAPI
@@ -349,6 +354,8 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
+  - Query
+  tags_raw:
   - Queries
   properties:
   - type: OpenAPI
@@ -433,6 +440,8 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
+  - TagResource
+  tags_raw:
   - '#TagResource'
   properties:
   - type: OpenAPI
@@ -475,6 +484,8 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -559,6 +570,8 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
+  - UntagResource
+  tags_raw:
   - '#UntagResource'
   properties:
   - type: OpenAPI
