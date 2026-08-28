@@ -1,5 +1,17 @@
 name: Amazon DynamoDB
 description: A fully managed NoSQL database service that provides fast and predictable performance with seamless scalability.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -609,6 +621,9 @@ apis:
     url: >-
       https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Types_Amazon_DynamoDB_Accelerator__DAX_.html
 common:
+  - type: CapabilityMap
+    url: capabilities/dynamodb-capability-edges.yml
+    name: Amazon DynamoDB Business Capability Map
   - type: AgenticAccess
     url: agentic-access/dynamodb-agentic-access.yml
   - type: TrustCenter
