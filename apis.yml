@@ -452,7 +452,7 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
-  - TagResource
+  - '#TagResource'
   tags_raw:
   - '#TagResource'
   properties:
@@ -582,7 +582,7 @@ apis:
   humanURL: https://aws.amazon.com/dynamodb/
   baseURL: https://dynamodb.{region}.amazonaws.com
   tags:
-  - UntagResource
+  - '#UntagResource'
   tags_raw:
   - '#UntagResource'
   properties:
